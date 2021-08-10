@@ -60462,6 +60462,15 @@ var Options = [{
       }
     }
   }, {
+    input: 'checkbox',
+    name: 'Avatar de l\'enseignant #1',
+    key: 'info18',
+    getOption: function getOption(input) {
+      if (input.checked) {
+        return "/d/teacher1.image";
+      }
+    }
+  }, {
     input: 'separator'
   }, {
     input: 'checkbox',
@@ -60491,6 +60500,15 @@ var Options = [{
       }
     }
   }, {
+    input: 'checkbox',
+    name: 'Avatar de l\'enseignant #2',
+    key: 'info17',
+    getOption: function getOption(input) {
+      if (input.checked) {
+        return "/d/teacher2.image";
+      }
+    }
+  }, {
     input: 'separator'
   }, {
     input: 'checkbox',
@@ -60517,6 +60535,15 @@ var Options = [{
     getOption: function getOption(input) {
       if (input.checked) {
         return "/d/teacher3.email";
+      }
+    }
+  }, {
+    input: 'checkbox',
+    name: 'Avatar de l\'enseignant #3',
+    key: 'info16',
+    getOption: function getOption(input) {
+      if (input.checked) {
+        return "/d/teacher3.image";
       }
     }
   }]
