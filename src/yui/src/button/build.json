@@ -1,0 +1,10 @@
+{
+  "name": "moodle-atto_recitautolink-button",
+  "builds": {
+    "moodle-atto_recitautolink-button": {
+      "jsfiles": [
+        "button.js"
+      ]
+    }
+  }
+}
