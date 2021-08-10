@@ -16,6 +16,7 @@ export class GeneratorView extends Component {
         this.setTab = this.setTab.bind(this);
         this.onChange = this.onChange.bind(this);
         this.generateCode = this.generateCode.bind(this);
+        this.generateTestCode = this.generateTestCode.bind(this);
     }
 
     render() {       
@@ -31,6 +32,10 @@ export class GeneratorView extends Component {
                     <Button variant="danger" onClick={this.props.onClose}>Annuler</Button>
                 </Tab>
             ))}
+            <Tab title="Autre" eventKey="other">
+                <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
+                <Button variant="danger" onClick={this.props.onClose}>Annuler</Button>
+            </Tab>
         </Tabs>;
         
 
@@ -48,7 +53,7 @@ export class GeneratorView extends Component {
     setTab(k){
         let validated = false;
         this.currentTab = this.getTab(k);
-        if (this.currentTab.singleInput) validated = true;
+        if (this.currentTab && this.currentTab.singleInput) validated = true;
         this.setState({activeTab: k, data: {}, validated: validated});
         this.resetValues();
     }
@@ -106,12 +111,12 @@ export class GeneratorView extends Component {
         }
     }
 
-    generateCode(){
-        if(!this.state.validated){
+    generateCode(save, data){
+        if(!this.state.validated && save){
             FeedbackCtrl.instance.showError($glVars.i18n.appName, "Champs manquant");
             return;
         }
-        let data = this.state.data;
+        data = data || this.state.data;
         let code = "";
         for (let i in data){
             if (!data[i].required && data[i].opt){//Options first, then required data last
@@ -124,7 +129,57 @@ export class GeneratorView extends Component {
             }
         }
         code = "[[" + code.substr(1) + "]]"; //Remove first slash
+        if (save){
+            this.props.onClose(code);
+        }
+        return code;
+    }
+
+    generateTestCode(){
+        let code = "";
+        for (let i in Options){
+            for (let v of Options[i].options){
+                let opt = this.getTestOption(Options[i], v);
+                if (opt.length > 0 && opt != "[[]]"){
+                    code += "<p>"+opt+"</p>";
+                }
+            }
+        }
+        
         this.props.onClose(code);
+    }
+
+    getTestOption(tab, option){
+        let data = {};
+        if (!tab.singleInput){
+            let mainTarget = tab.options[0];
+            data[mainTarget.key] = {opt: this.getTestOptionValue(mainTarget), required: true};
+        }
+        data[option.key] = {opt: this.getTestOptionValue(option), required: false};
+
+        return this.generateCode(false, data);
+    }
+
+    getTestOptionValue(option){
+        if (!option.getOption) return "";
+
+        let obj = {};
+        if (option.input == 'checkbox'){
+            obj = {checked: true}
+        }
+        if (option.input == 'text'){
+            obj = {value: 'btn btn-secondary'}
+        }
+        if (option.input == 'select'){
+            let dataProvider = [];
+            if (this.state[option.dataProvider]){
+                dataProvider = this.state[option.dataProvider];
+            }
+            if (dataProvider.length == 0) return "";
+            obj = {value: dataProvider[Math.floor(Math.random() * dataProvider.length)].value};
+        }
+
+        return option.getOption(obj);
     }
 
     componentDidMount(){

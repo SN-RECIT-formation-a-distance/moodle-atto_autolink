@@ -60368,7 +60368,7 @@ var Options = [{
     required: true,
     getOption: function getOption(input) {
       if (input.value.length > 0) {
-        return "/h5p/" + input.value;
+        return "/h5p/" + input.value.substr(0, -4); //Remove .h5p
       }
     }
   }]
@@ -60467,7 +60467,7 @@ var Options = [{
     key: 'info18',
     getOption: function getOption(input) {
       if (input.checked) {
-        return "/d/teacher1.image";
+        return "/d/teacher1.picture";
       }
     }
   }, {
@@ -60505,7 +60505,7 @@ var Options = [{
     key: 'info17',
     getOption: function getOption(input) {
       if (input.checked) {
-        return "/d/teacher2.image";
+        return "/d/teacher2.picture";
       }
     }
   }, {
@@ -60543,7 +60543,7 @@ var Options = [{
     key: 'info16',
     getOption: function getOption(input) {
       if (input.checked) {
-        return "/d/teacher3.image";
+        return "/d/teacher3.picture";
       }
     }
   }]
@@ -60876,6 +60876,7 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
     _this.setTab = _this.setTab.bind(_assertThisInitialized(_this));
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.generateCode = _this.generateCode.bind(_assertThisInitialized(_this));
+    _this.generateTestCode = _this.generateTestCode.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -60903,7 +60904,15 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
           variant: "danger",
           onClick: _this2.props.onClose
         }, "Annuler"));
-      }));
+      }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tab, {
+        title: "Autre",
+        eventKey: "other"
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.generateTestCode
+      }, "G\xE9n\xE9rer cas de tests"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+        variant: "danger",
+        onClick: this.props.onClose
+      }, "Annuler")));
 
       return main;
     }
@@ -60921,7 +60930,7 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
     value: function setTab(k) {
       var validated = false;
       this.currentTab = this.getTab(k);
-      if (this.currentTab.singleInput) validated = true;
+      if (this.currentTab && this.currentTab.singleInput) validated = true;
       this.setState({
         activeTab: k,
         data: {},
@@ -61051,14 +61060,14 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "generateCode",
-    value: function generateCode() {
-      if (!this.state.validated) {
+    value: function generateCode(save, data) {
+      if (!this.state.validated && save) {
         _Feedback.FeedbackCtrl.instance.showError(_common.$glVars.i18n.appName, "Champs manquant");
 
         return;
       }
 
-      var data = this.state.data;
+      data = data || this.state.data;
       var code = "";
 
       for (var i in data) {
@@ -61076,7 +61085,90 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
 
       code = "[[" + code.substr(1) + "]]"; //Remove first slash
 
+      if (save) {
+        this.props.onClose(code);
+      }
+
+      return code;
+    }
+  }, {
+    key: "generateTestCode",
+    value: function generateTestCode() {
+      var code = "";
+
+      for (var i in _OptionList.Options) {
+        var _iterator2 = _createForOfIteratorHelper(_OptionList.Options[i].options),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var v = _step2.value;
+            var opt = this.getTestOption(_OptionList.Options[i], v);
+
+            if (opt.length > 0 && opt != "[[]]") {
+              code += "<p>" + opt + "</p>";
+            }
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      }
+
       this.props.onClose(code);
+    }
+  }, {
+    key: "getTestOption",
+    value: function getTestOption(tab, option) {
+      var data = {};
+
+      if (!tab.singleInput) {
+        var mainTarget = tab.options[0];
+        data[mainTarget.key] = {
+          opt: this.getTestOptionValue(mainTarget),
+          required: true
+        };
+      }
+
+      data[option.key] = {
+        opt: this.getTestOptionValue(option),
+        required: false
+      };
+      return this.generateCode(false, data);
+    }
+  }, {
+    key: "getTestOptionValue",
+    value: function getTestOptionValue(option) {
+      if (!option.getOption) return "";
+      var obj = {};
+
+      if (option.input == 'checkbox') {
+        obj = {
+          checked: true
+        };
+      }
+
+      if (option.input == 'text') {
+        obj = {
+          value: 'btn btn-secondary'
+        };
+      }
+
+      if (option.input == 'select') {
+        var dataProvider = [];
+
+        if (this.state[option.dataProvider]) {
+          dataProvider = this.state[option.dataProvider];
+        }
+
+        if (dataProvider.length == 0) return "";
+        obj = {
+          value: dataProvider[Math.floor(Math.random() * dataProvider.length)].value
+        };
+      }
+
+      return option.getOption(obj);
     }
   }, {
     key: "componentDidMount",
@@ -61093,37 +61185,6 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
 
         var list = [];
 
-        var _iterator2 = _createForOfIteratorHelper(result.data),
-            _step2;
-
-        try {
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            var e = _step2.value;
-            list.push({
-              value: e.name,
-              text: e.name + " [" + e.modname + "]"
-            });
-          }
-        } catch (err) {
-          _iterator2.e(err);
-        } finally {
-          _iterator2.f();
-        }
-
-        that.setState({
-          cmList: list
-        });
-      });
-
-      _common.$glVars.webApi.getSectionList(_common.$glVars.classHandler.get("courseid"), function (result) {
-        if (!result.success) {
-          _Feedback.FeedbackCtrl.instance.showError(_common.$glVars.i18n.appName, result.msg);
-
-          return;
-        }
-
-        var list = [];
-
         var _iterator3 = _createForOfIteratorHelper(result.data),
             _step3;
 
@@ -61132,7 +61193,7 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
             var e = _step3.value;
             list.push({
               value: e.name,
-              text: e.name
+              text: e.name + " [" + e.modname + "]"
             });
           }
         } catch (err) {
@@ -61142,11 +61203,11 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
         }
 
         that.setState({
-          sectionList: list
+          cmList: list
         });
       });
 
-      _common.$glVars.webApi.getH5PList(_common.$glVars.classHandler.get("courseid"), function (result) {
+      _common.$glVars.webApi.getSectionList(_common.$glVars.classHandler.get("courseid"), function (result) {
         if (!result.success) {
           _Feedback.FeedbackCtrl.instance.showError(_common.$glVars.i18n.appName, result.msg);
 
@@ -61170,6 +61231,37 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
           _iterator4.e(err);
         } finally {
           _iterator4.f();
+        }
+
+        that.setState({
+          sectionList: list
+        });
+      });
+
+      _common.$glVars.webApi.getH5PList(_common.$glVars.classHandler.get("courseid"), function (result) {
+        if (!result.success) {
+          _Feedback.FeedbackCtrl.instance.showError(_common.$glVars.i18n.appName, result.msg);
+
+          return;
+        }
+
+        var list = [];
+
+        var _iterator5 = _createForOfIteratorHelper(result.data),
+            _step5;
+
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var e = _step5.value;
+            list.push({
+              value: e.name,
+              text: e.name
+            });
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
         }
 
         that.setState({
