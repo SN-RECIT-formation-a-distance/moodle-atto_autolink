@@ -147,7 +147,7 @@ export const Options = [
                 required: true,
                 getOption: function(input){
                     if (input.value.length > 0){
-                        return "/h5p/"+ input.value;
+                        return "/h5p/"+ input.value.substr(0, -4); //Remove .h5p
                     }
                 }
             },
@@ -264,7 +264,7 @@ export const Options = [
                 key: 'info18',
                 getOption: function(input){
                     if (input.checked){
-                        return "/d/teacher1.image";
+                        return "/d/teacher1.picture";
                     }
                 }
             },
@@ -309,7 +309,7 @@ export const Options = [
                 key: 'info17',
                 getOption: function(input){
                     if (input.checked){
-                        return "/d/teacher2.image";
+                        return "/d/teacher2.picture";
                     }
                 }
             },
@@ -354,7 +354,7 @@ export const Options = [
                 key: 'info16',
                 getOption: function(input){
                     if (input.checked){
-                        return "/d/teacher3.image";
+                        return "/d/teacher3.picture";
                     }
                 }
             },
