@@ -126,7 +126,7 @@ export const Options = [
             {
                 input: 'checkbox',
                 name: 'Ouvrir dans un modal',
-                key: 'moda',
+                key: 'modal',
                 getOption: function(input){
                     if (input.checked){
                         return "/p";
@@ -148,6 +148,183 @@ export const Options = [
                 getOption: function(input){
                     if (input.value.length > 0){
                         return "/h5p/"+ input.value;
+                    }
+                }
+            },
+        ]
+    },
+    {
+        name: 'Information',
+        key: 'info',
+        noValidation: true,
+        options: [
+            {
+                input: 'checkbox',
+                name: 'Nom du cours',
+                key: 'info1',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/course.fullname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Nom court du cours',
+                key: 'info2',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/course.shortname";
+                    }
+                }
+            },
+
+            {
+                input: 'separator',
+            },
+
+            {
+                input: 'checkbox',
+                name: 'Prénom de l\'élève',
+                key: 'info3',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/user.firstname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Nom de l\'élève',
+                key: 'info4',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/user.lastname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Email de l\'élève',
+                key: 'info5',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/user.email";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Avatar de l\'élève',
+                key: 'info6',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/user.picture";
+                    }
+                }
+            },
+
+            {
+                input: 'separator',
+            },
+
+            {
+                input: 'checkbox',
+                name: 'Prénom de l\'enseignant #1',
+                key: 'info7',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher1.firstname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Nom de l\'enseignant #1',
+                key: 'info8',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher1.lastname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Email de l\'enseignant #1',
+                key: 'info9',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher1.email";
+                    }
+                }
+            },
+
+            {
+                input: 'separator',
+            },
+
+            {
+                input: 'checkbox',
+                name: 'Prénom de l\'enseignant #2',
+                key: 'info10',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher2.firstname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Nom de l\'enseignant #2',
+                key: 'info11',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher2.lastname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Email de l\'enseignant #2',
+                key: 'info12',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher2.email";
+                    }
+                }
+            },
+
+            {
+                input: 'separator',
+            },
+
+            {
+                input: 'checkbox',
+                name: 'Prénom de l\'enseignant #3',
+                key: 'info13',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher3.firstname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Nom de l\'enseignant #3',
+                key: 'info14',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher3.lastname";
+                    }
+                }
+            },
+            {
+                input: 'checkbox',
+                name: 'Email de l\'enseignant #3',
+                key: 'info15',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/teacher3.email";
                     }
                 }
             },

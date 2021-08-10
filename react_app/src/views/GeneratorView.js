@@ -12,16 +12,16 @@ import { ComboBox } from '../libs/components/ComboBox';
 export class GeneratorView extends Component {
     constructor(props) {
         super(props);
-        this.state = {cmList: [], sectionList: [], h5pList: [], activeTab: 'activity', data: [], values: {}, validated: false};
+        this.state = {cmList: [], sectionList: [], h5pList: [], activeTab: 'activity', data: [], values: {}, validated: false, initialized: false};
         this.setTab = this.setTab.bind(this);
         this.onChange = this.onChange.bind(this);
         this.generateCode = this.generateCode.bind(this);
-        this.resetValues();
     }
 
     render() {       
+        if (!this.state.initialized) return null;
         let main = 
-        <Tabs activeKey={this.state.activeTab}  onSelect={this.setTab}  className="mb-3">
+        <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3">
             {Options.map((p, index) => (
                 <Tab title={p.name} eventKey={p.key} key={index}>
                     {p.options.map((o, i) => {
@@ -37,8 +37,19 @@ export class GeneratorView extends Component {
         return (main);
     }
 
+    getTab(k){
+        for (let i in Options){
+            if (Options[i].key == k){
+                return Options[i];
+            }
+        }
+    }
+
     setTab(k){
-        this.setState({activeTab: k, values: {}, validated: false});
+        let validated = false;
+        let tab = this.getTab(k);
+        if (tab.noValidation) validated = true;
+        this.setState({activeTab: k, values: {}, validated: validated});
         this.resetValues();
     }
 
@@ -80,6 +91,11 @@ export class GeneratorView extends Component {
             }
             return <Form.Group className="mb-3" key={key}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
+        
+        
+        if (option.input == 'separator'){
+            return <Form.Group className="mb-3" key={key}><hr/></Form.Group>;
+        }
     }
 
     generateCode(){
@@ -104,6 +120,7 @@ export class GeneratorView extends Component {
     }
 
     componentDidMount(){
+        this.resetValues();
         let that = this;
         
         $glVars.webApi.getCmList($glVars.classHandler.get("courseid"), function(result){
@@ -144,5 +161,7 @@ export class GeneratorView extends Component {
             }
             that.setState({h5pList: list});
         });
+
+        this.setState({initialized: true});
     }
 }
