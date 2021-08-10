@@ -48,7 +48,7 @@ export const Options = [
             {
                 input: 'checkbox',
                 name: 'Ouvrir dans un modal',
-                key: 'moda',
+                key: 'modal',
                 getOption: function(input){
                     if (input.checked){
                         return "/p";
@@ -156,7 +156,7 @@ export const Options = [
     {
         name: 'Information',
         key: 'info',
-        noValidation: true,
+        singleInput: true,
         options: [
             {
                 input: 'checkbox',

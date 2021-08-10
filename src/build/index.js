@@ -60281,7 +60281,7 @@ var Options = [{
   }, {
     input: 'checkbox',
     name: 'Ouvrir dans un modal',
-    key: 'moda',
+    key: 'modal',
     getOption: function getOption(input) {
       if (input.checked) {
         return "/p";
@@ -60375,7 +60375,7 @@ var Options = [{
 }, {
   name: 'Information',
   key: 'info',
-  noValidation: true,
+  singleInput: true,
   options: [{
     input: 'checkbox',
     name: 'Nom du cours',
@@ -60893,11 +60893,11 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
     key: "setTab",
     value: function setTab(k) {
       var validated = false;
-      var tab = this.getTab(k);
-      if (tab.noValidation) validated = true;
+      this.currentTab = this.getTab(k);
+      if (this.currentTab.singleInput) validated = true;
       this.setState({
         activeTab: k,
-        values: {},
+        data: {},
         validated: validated
       });
       this.resetValues();
@@ -60926,6 +60926,7 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
       this.setState({
         values: values
       });
+      return values;
     }
   }, {
     key: "onChange",
@@ -60940,7 +60941,12 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
         });
       }
 
-      values[e.target.name] = e.target.value;
+      if (this.currentTab.singleInput) {
+        data = {};
+        values = this.resetValues();
+      }
+
+      values[e.target.name] = e.target.value || e.target.checked;
       data[e.target.name] = {
         opt: opt,
         required: option.required
@@ -60955,24 +60961,29 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
     value: function getInput(option, key) {
       var _this3 = this;
 
+      var id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
+
       if (option.input == 'checkbox') {
         return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
           className: "mb-3",
-          key: key
+          key: key,
+          controlId: "item" + id
         }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Check, {
           type: "checkbox",
           label: option.name,
           name: option.key,
           onChange: function onChange(e) {
             return _this3.onChange(e, option);
-          }
+          },
+          checked: this.state.values[option.key]
         }));
       }
 
       if (option.input == 'text') {
         return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
           className: "mb-3",
-          key: key
+          key: key,
+          controlId: "item" + id
         }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, option.name), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
           type: "text",
           name: option.key,
@@ -60992,7 +61003,8 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
 
         return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
           className: "mb-3",
-          key: key
+          key: key,
+          controlId: "item" + id
         }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, option.name), /*#__PURE__*/_react.default.createElement(_ComboBox.ComboBox, {
           options: dataProvider,
           name: option.key,
@@ -61023,14 +61035,14 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
       var code = "";
 
       for (var i in data) {
-        if (!data[i].required) {
+        if (!data[i].required && data[i].opt) {
           //Options first, then required data last
           code += data[i].opt;
         }
       }
 
       for (var _i in data) {
-        if (data[_i].required) {
+        if (data[_i].required && data[_i].opt) {
           code += data[_i].opt;
         }
       }
@@ -61042,7 +61054,7 @@ var GeneratorView = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.resetValues();
+      this.setTab(this.state.activeTab);
       var that = this;
 
       _common.$glVars.webApi.getCmList(_common.$glVars.classHandler.get("courseid"), function (result) {

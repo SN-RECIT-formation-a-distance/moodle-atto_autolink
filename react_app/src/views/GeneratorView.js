@@ -47,9 +47,9 @@ export class GeneratorView extends Component {
 
     setTab(k){
         let validated = false;
-        let tab = this.getTab(k);
-        if (tab.noValidation) validated = true;
-        this.setState({activeTab: k, values: {}, validated: validated});
+        this.currentTab = this.getTab(k);
+        if (this.currentTab.singleInput) validated = true;
+        this.setState({activeTab: k, data: {}, validated: validated});
         this.resetValues();
     }
 
@@ -60,7 +60,9 @@ export class GeneratorView extends Component {
                 values[v.key] = "";
             }
         }
+
         this.setState({values:values});
+        return values;
     }
 
     onChange(e, option){
@@ -70,18 +72,24 @@ export class GeneratorView extends Component {
         if (option.required){
             this.setState({validated: true});
         }
-        values[e.target.name] = e.target.value;
-        data[e.target.name] = {opt:opt, required:option.required};
+        if (this.currentTab.singleInput){
+            data = {};
+            values = this.resetValues();
+        }
+        values[e.target.name] = e.target.value || e.target.checked;
+        data[e.target.name] = {opt: opt, required: option.required};
         this.setState({data: data, values: values});
     }
 
     getInput(option, key){
+        let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
+
         if (option.input == 'checkbox'){
-            return <Form.Group className="mb-3" key={key}><Form.Check type="checkbox" label={option.name} name={option.key} onChange={(e) => this.onChange(e, option)} /></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="checkbox" label={option.name} name={option.key} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'text'){
-            return <Form.Group className="mb-3" key={key}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -89,7 +97,7 @@ export class GeneratorView extends Component {
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
             }
-            return <Form.Group className="mb-3" key={key}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         
@@ -106,12 +114,12 @@ export class GeneratorView extends Component {
         let data = this.state.data;
         let code = "";
         for (let i in data){
-            if (!data[i].required){//Options first, then required data last
+            if (!data[i].required && data[i].opt){//Options first, then required data last
                 code += data[i].opt;
             }
         }
         for (let i in data){
-            if (data[i].required){
+            if (data[i].required && data[i].opt){
                 code += data[i].opt;
             }
         }
@@ -120,7 +128,7 @@ export class GeneratorView extends Component {
     }
 
     componentDidMount(){
-        this.resetValues();
+        this.setTab(this.state.activeTab);
         let that = this;
         
         $glVars.webApi.getCmList($glVars.classHandler.get("courseid"), function(result){
