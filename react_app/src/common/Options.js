@@ -5,11 +5,11 @@ export class Options
     static appVersion(){ return packageJson.version; }
 
     static appTitle(){
-        return "Activité RÉCIT | " + this.appVersion();
+        return "Autolink RÉCIT | " + this.appVersion();
     }
 
     static getGateway(){
-        return `${M.cfg.wwwroot}/local/recitcommon/php/RecitApi.php`;
+        return `${M.cfg.wwwroot}/local/recitcommon/php/CommonApi.php`;
     }
     
 }
