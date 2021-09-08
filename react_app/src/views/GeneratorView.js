@@ -29,12 +29,12 @@ export class GeneratorView extends Component {
                         return this.getInput(o, i);
                     })}
                     <Button onClick={this.generateCode}>Insérer</Button>
-                    <Button variant="danger" onClick={this.props.onClose}>Annuler</Button>
+                    <Button variant="danger" onClick={() => this.props.onClose()}>Annuler</Button>
                 </Tab>
             ))}
             <Tab title="Autre" eventKey="other">
                 <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
-                <Button variant="danger" onClick={this.props.onClose}>Annuler</Button>
+                <Button variant="danger" onClick={() => this.props.onClose()}>Annuler</Button>
             </Tab>
         </Tabs>;
         
