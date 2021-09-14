@@ -26,16 +26,6 @@ export const Options = [
                 }
             },
             {
-                input: 'text',
-                name: 'Classe CSS',
-                key: 'css',
-                getOption: function(input){
-                    if (input.value.length > 0){
-                        return "/class:\""+ input.value+"\"";
-                    }
-                }
-            },
-            {
                 input: 'checkbox',
                 name: 'Ouvrir dans un nouvel onglet',
                 key: 'newtab',
@@ -75,6 +65,19 @@ export const Options = [
                     }
                 }
             },
+            {
+                input: 'separator',
+            },
+            {
+                input: 'text',
+                name: 'Classe CSS',
+                key: 'css',
+                getOption: function(input){
+                    if (input.value.length > 0){
+                        return "/class:\""+ input.value+"\"";
+                    }
+                }
+            },
         ]
     },
     {
@@ -104,16 +107,6 @@ export const Options = [
                 }
             },
             {
-                input: 'text',
-                name: 'Classe CSS',
-                key: 'css',
-                getOption: function(input){
-                    if (input.value.length > 0){
-                        return "/class:\""+ input.value+"\"";
-                    }
-                }
-            },
-            {
                 input: 'checkbox',
                 name: 'Ouvrir dans un nouvel onglet',
                 key: 'newtab',
@@ -130,6 +123,19 @@ export const Options = [
                 getOption: function(input){
                     if (input.checked){
                         return "/p";
+                    }
+                }
+            },
+            {
+                input: 'separator',
+            },
+            {
+                input: 'text',
+                name: 'Classe CSS',
+                key: 'css',
+                getOption: function(input){
+                    if (input.value.length > 0){
+                        return "/class:\""+ input.value+"\"";
                     }
                 }
             },

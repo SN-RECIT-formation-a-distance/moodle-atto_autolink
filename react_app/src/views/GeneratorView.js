@@ -31,7 +31,8 @@ export class GeneratorView extends Component {
                     })}
                     {(p.key == 'activity' || p.key == 'section') &&
                     <>
-                        <Form.Group className="mb-3" key={"ctrl"+index} controlId={"ctrl"+index}><Button onClick={this.generateCSSButton}>Générer un bouton </Button></Form.Group>
+                    <Form.Group className="mb-3" key={"ctrl"+index} controlId={"ctrl"+index}><Button onClick={() => this.generateCSSButton('primary')}>Générer un bouton primaire</Button></Form.Group>
+                        <Form.Group className="mb-3" key={"ctrl2"+index} controlId={"ctrl2"+index}><Button onClick={() => this.generateCSSButton('secondary')}>Générer un bouton secondaire</Button></Form.Group>
                         <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
                     </>}
                     <Button onClick={this.generateCode}>Insérer</Button>
@@ -48,10 +49,10 @@ export class GeneratorView extends Component {
         return (main);
     }
 
-    generateCSSButton(){
+    generateCSSButton(css){
         let values = this.state.values;
         if (values['css'].includes('btn')) return;
-        values['css'] += ' btn btn-secondary ';
+        values['css'] += ' btn btn-'+css+' ';
         this.setState({values: values});
     }
 
