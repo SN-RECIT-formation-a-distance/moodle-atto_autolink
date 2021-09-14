@@ -28,7 +28,7 @@ $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for
 $plugin->release = 'R13-V1.13.0'; 
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [
-    'local_recitcommon' => 2021050400, // ANY_VERSION
+    'local_recitcommon' => 2021082000,
 	'filter_recitactivity' => 2021050400
 ];
 $plugin->maturity = MATURITY_ALPHA; // MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC or MATURITY_STABLE
