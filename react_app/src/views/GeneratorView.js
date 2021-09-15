@@ -31,8 +31,6 @@ export class GeneratorView extends Component {
                     })}
                     {(p.key == 'activity' || p.key == 'section') &&
                     <>
-                    <Form.Group className="mb-3" key={"ctrl"+index} controlId={"ctrl"+index}><Button onClick={() => this.generateCSSButton('primary')}>Générer un bouton primaire</Button></Form.Group>
-                        <Form.Group className="mb-3" key={"ctrl2"+index} controlId={"ctrl2"+index}><Button onClick={() => this.generateCSSButton('secondary')}>Générer un bouton secondaire</Button></Form.Group>
                         <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
                     </>}
                     <Button onClick={this.generateCode}>Insérer</Button>
@@ -51,8 +49,12 @@ export class GeneratorView extends Component {
 
     generateCSSButton(css){
         let values = this.state.values;
-        if (values['css'].includes('btn')) return;
-        values['css'] += ' btn btn-'+css+' ';
+        let btn = ' btn btn-'+css+' ';
+        if (values['css'].includes('btn')){
+            values['css'] = values['css'].replace(btn, '');
+        }else{
+            values['css'] += btn;
+        }
         this.setState({values: values});
     }
 
@@ -72,21 +74,28 @@ export class GeneratorView extends Component {
         this.resetValues();
     }
 
-    resetValues(){
+    resetValues(group){
         let values = this.state.values;
         for (let i in Options){
             for (let v of Options[i].options){
-                values[v.key] = "";
+                if (!group || group == v.group){
+                    if (v.input == 'radio' || v.input == 'checkbox'){
+                        values[v.key] = false;
+                    }else{
+                        values[v.key] = "";
+                    }
+                }
             }
         }
 
-        this.setState({values:values});
+        if (!group) this.setState({values:values});
         return values;
     }
 
     onChange(e, option){
         let data = this.state.data;
         let values = this.state.values;
+        let name = e.target.getAttribute('data-key');
         let opt = option.getOption(e.target);
         if (option.required){
             this.setState({validated: true});
@@ -96,23 +105,35 @@ export class GeneratorView extends Component {
             values = this.resetValues();
         }
         if (e.target.type == 'radio'){
-            values[e.target.name] = e.target.checked;
+            this.resetValues(e.target.name);
+            values[name] = true;
+        }else if (e.target.type == 'checkbox'){
+            values[name] = e.target.checked;
         }else{
-            values[e.target.name] = e.target.value;
+            values[name] = e.target.value;
         }
-        data[e.target.name] = {opt: opt, required: option.required};
+        
+        data[name] = {opt: opt, required: option.required};
         this.setState({data: data, values: values});
+
+        if (name == 'btn'){
+            this.generateCSSButton('primary');
+        }
     }
 
     getInput(option, key){
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
         if (option.input == 'checkbox'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="radio" label={option.name} name={option.key} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="checkbox" label={option.name} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
+        }
+        
+        if (option.input == 'radio'){
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="radio" label={option.name} name={option.group} data-key={option.key} value={option.key} onChange={(e) => this.onChange(e, option)}/></Form.Group>;
         }
         
         if (option.input == 'text'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -120,7 +141,7 @@ export class GeneratorView extends Component {
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
             }
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         

@@ -1,3 +1,7 @@
+import React, { Component } from 'react';
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export const Options = [
     {
         name: 'Activités',
@@ -26,7 +30,19 @@ export const Options = [
                 }
             },
             {
-                input: 'checkbox',
+                group: 'action',
+                input: 'radio',
+                name: 'Ouvrir dans le même onglet',
+                key: 'oldtab',
+                getOption: function(input){
+                    if (input.checked){
+                        return "";
+                    }
+                }
+            },
+            {
+                input: 'radio',
+                group: 'action',
                 name: 'Ouvrir dans un nouvel onglet',
                 key: 'newtab',
                 getOption: function(input){
@@ -36,7 +52,8 @@ export const Options = [
                 }
             },
             {
-                input: 'checkbox',
+                group: 'action',
+                input: 'radio',
                 name: 'Ouvrir dans un modal',
                 key: 'modal',
                 getOption: function(input){
@@ -44,6 +61,9 @@ export const Options = [
                         return "/p";
                     }
                 }
+            },
+            {
+                input: 'separator',
             },
             {
                 input: 'checkbox',
@@ -67,6 +87,16 @@ export const Options = [
             },
             {
                 input: 'separator',
+            },
+            {
+                input: 'checkbox',
+                name: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                key: 'btn',
+                getOption: function(input){
+                    if (input.checked){
+                        return "";
+                    }
+                }
             },
             {
                 input: 'text',
@@ -107,7 +137,19 @@ export const Options = [
                 }
             },
             {
-                input: 'checkbox',
+                group: 'action',
+                input: 'radio',
+                name: 'Ouvrir dans le même onglet',
+                key: 'oldtab',
+                getOption: function(input){
+                    if (input.checked){
+                        return "";
+                    }
+                }
+            },
+            {
+                group: 'action',
+                input: 'radio',
                 name: 'Ouvrir dans un nouvel onglet',
                 key: 'newtab',
                 getOption: function(input){
@@ -117,7 +159,8 @@ export const Options = [
                 }
             },
             {
-                input: 'checkbox',
+                group: 'action',
+                input: 'radio',
                 name: 'Ouvrir dans un modal',
                 key: 'modal',
                 getOption: function(input){
@@ -128,6 +171,16 @@ export const Options = [
             },
             {
                 input: 'separator',
+            },
+            {
+                input: 'checkbox',
+                name: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                key: 'btn',
+                getOption: function(input){
+                    if (input.checked){
+                        return "";
+                    }
+                }
             },
             {
                 input: 'text',
