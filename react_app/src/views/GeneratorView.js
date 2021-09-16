@@ -49,13 +49,19 @@ export class GeneratorView extends Component {
 
     generateCSSButton(css){
         let values = this.state.values;
+        let data = this.state.data;
         let btn = ' btn btn-'+css+' ';
-        if (values['css'].includes('btn')){
-            values['css'] = values['css'].replace(btn, '');
+        let name = 'css';
+        if (values[name].includes('btn')){
+            values[name] = values[name].replace(btn, '');
         }else{
-            values['css'] += btn;
+            values[name] += btn;
         }
-        this.setState({values: values});
+        let option = this.getOption(name);
+        let opt = option.getOption({value:values[name]});
+        data[name] = {opt: opt, required: option.required};
+
+        this.setState({data: data, values: values});
     }
 
     getTab(k){
@@ -74,6 +80,16 @@ export class GeneratorView extends Component {
         this.resetValues();
     }
 
+    getOption(key){
+        for (let i in Options){
+            for (let v of Options[i].options){
+                if (v.key == key){
+                    return v;
+                }
+            }
+        }
+    }
+
     resetValues(group){
         let values = this.state.values;
         for (let i in Options){
@@ -83,6 +99,9 @@ export class GeneratorView extends Component {
                         values[v.key] = false;
                     }else{
                         values[v.key] = "";
+                    }
+                    if (v.default){
+                        values[v.key] = v.default;;
                     }
                 }
             }
@@ -96,7 +115,11 @@ export class GeneratorView extends Component {
         let data = this.state.data;
         let values = this.state.values;
         let name = e.target.name;
-        if (e.target.getAttribute) name = e.target.getAttribute('data-key');
+        let radio = false;
+        if (e.target.getAttribute){
+            name = e.target.getAttribute('data-key');
+            if (e.target.getAttribute('data-radio')) radio = true;
+        }
         let opt = option.getOption(e.target);
         if (option.required){
             this.setState({validated: true});
@@ -105,8 +128,12 @@ export class GeneratorView extends Component {
             data = {};
             values = this.resetValues();
         }
-        if (e.target.type == 'radio'){
-            this.resetValues(e.target.name);
+        if (radio){
+            let els = document.querySelectorAll("input[name="+e.target.name+"]");
+            for (let el of els){
+                let n = el.getAttribute('data-key');
+                values[n] = false;
+            }
             values[name] = true;
         }else if (e.target.type == 'checkbox'){
             values[name] = e.target.checked;
@@ -130,7 +157,7 @@ export class GeneratorView extends Component {
         }
         
         if (option.input == 'radio'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="radio" label={option.name} name={option.group} data-key={option.key} value={option.key} onChange={(e) => this.onChange(e, option)}/></Form.Group>;
+            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="checkbox" label={option.name} name={option.group} data-key={option.key} data-radio="true" onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'text'){
@@ -181,7 +208,7 @@ export class GeneratorView extends Component {
             for (let v of Options[i].options){
                 let opt = this.getTestOption(Options[i], v);
                 if (opt.length > 0 && opt != "[[]]"){
-                    code += "<p>"+opt+"</p>";
+                    code += "<p>"+opt+" => "+opt.replace('[', '{')+"</p>";
                 }
             }
         }

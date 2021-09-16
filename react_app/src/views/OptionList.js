@@ -32,6 +32,7 @@ export const Options = [
             {
                 group: 'action',
                 input: 'radio',
+                default: true,
                 name: 'Ouvrir dans le même onglet',
                 key: 'oldtab',
                 getOption: function(input){
@@ -139,6 +140,7 @@ export const Options = [
             {
                 group: 'action',
                 input: 'radio',
+                default: true,
                 name: 'Ouvrir dans le même onglet',
                 key: 'oldtab',
                 getOption: function(input){
