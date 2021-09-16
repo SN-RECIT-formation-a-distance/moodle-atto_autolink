@@ -95,7 +95,8 @@ export class GeneratorView extends Component {
     onChange(e, option){
         let data = this.state.data;
         let values = this.state.values;
-        let name = e.target.getAttribute('data-key');
+        let name = e.target.name;
+        if (e.target.getAttribute) name = e.target.getAttribute('data-key');
         let opt = option.getOption(e.target);
         if (option.required){
             this.setState({validated: true});
