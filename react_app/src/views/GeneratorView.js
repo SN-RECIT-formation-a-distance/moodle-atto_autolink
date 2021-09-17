@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Tabs, Tab, Button, Form} from 'react-bootstrap';
+import {Tabs, Tab, Button, Form, ButtonGroup} from 'react-bootstrap';
 import {faArrowLeft, faArrowRight, faPencilAlt, faPlusCircle, faWrench, faTrashAlt, faBars, faTv, faEye, faAngleRight, faGripVertical} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {JsNx} from '../libs/utils/Utils';
@@ -33,13 +33,17 @@ export class GeneratorView extends Component {
                     <>
                         <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
                     </>}
-                    <Button onClick={this.generateCode}>Insérer</Button>
-                    <Button variant="danger" onClick={() => this.props.onClose()}>Annuler</Button>
+                    <ButtonGroup style={{float:'right'}}>
+                        <Button onClick={this.generateCode}>Insérer</Button>
+                        <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
+                    </ButtonGroup>
                 </Tab>
             ))}
             <Tab title="Autre" eventKey="other">
-                <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
-                <Button variant="danger" onClick={() => this.props.onClose()}>Annuler</Button>
+                <ButtonGroup style={{float:'right'}}>
+                    <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
+                    <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
+                </ButtonGroup>
             </Tab>
         </Tabs>;
         
