@@ -208,7 +208,8 @@ export const Options = [
                 required: true,
                 getOption: function(input){
                     if (input.value.length > 0){
-                        return "/h5p/"+input.value.substr(0, input.value.length -4); //Remove .h5p
+                        //return "/h5p/"+input.value.substr(0, input.value.length -4); //Remove .h5p
+                        return "/h5p/"+input.value; 
                     }
                 }
             },
