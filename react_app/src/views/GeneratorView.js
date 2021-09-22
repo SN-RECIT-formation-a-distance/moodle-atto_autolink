@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {Tabs, Tab, Button, Form, ButtonGroup} from 'react-bootstrap';
-import {faArrowLeft, faArrowRight, faPencilAlt, faPlusCircle, faWrench, faTrashAlt, faBars, faTv, faEye, faAngleRight, faGripVertical} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {JsNx} from '../libs/utils/Utils';
+import {Tabs, Tab, Button, Form, ButtonGroup, Card} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
 import { FeedbackCtrl } from '../libs/components/Feedback';
@@ -23,29 +20,33 @@ export class GeneratorView extends Component {
     render() {       
         if (!this.state.initialized) return null;
         let main = 
-        <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3">
-            {Options.map((p, index) => (
-                <Tab title={p.name} eventKey={p.key} key={index}>
-                    {p.options.map((o, i) => {
-                        return this.getInput(o, i);
-                    })}
-                    {(p.key == 'activity' || p.key == 'section') &&
-                    <>
-                        <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
-                    </>}
-                    <ButtonGroup style={{float:'right'}}>
-                        <Button onClick={this.generateCode}>Insérer</Button>
-                        <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
-                    </ButtonGroup>
-                </Tab>
-            ))}
-            <Tab title="Autre" eventKey="other">
-                <ButtonGroup style={{float:'right'}}>
+        <Card>
+            <Card.Body>
+                <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
+                    {Options.map((p, index) => (
+                        <Tab title={p.name} eventKey={p.key} key={index}>
+                            {p.options.map((o, i) => {
+                                return this.getInput(o, i);
+                            })}
+                            {(p.key == 'activity' || p.key == 'section') &&
+                            <>
+                                <hr/>
+                                <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
+                            </>}                        
+                        </Tab>
+                    ))}
+                </Tabs>
+            </Card.Body>
+            <Card.Footer className="d-flex justify-content-between">
+                <ButtonGroup>
                     <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
-                    <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
                 </ButtonGroup>
-            </Tab>
-        </Tabs>;
+                <ButtonGroup>
+                    <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
+                    <Button onClick={this.generateCode}>Insérer</Button>
+                </ButtonGroup>
+            </Card.Footer>
+        </Card>;
         
 
         return (main);
@@ -125,6 +126,7 @@ export class GeneratorView extends Component {
             if (e.target.getAttribute('data-radio')) radio = true;
         }
         let opt = option.getOption(e.target);
+        
         if (option.required){
             this.setState({validated: true});
         }
@@ -187,7 +189,9 @@ export class GeneratorView extends Component {
             FeedbackCtrl.instance.showError($glVars.i18n.appName, "Champs manquant");
             return;
         }
+
         data = data || this.state.data;
+
         let code = "";
         for (let i in data){
             if (!data[i].required && data[i].opt){//Options first, then required data last

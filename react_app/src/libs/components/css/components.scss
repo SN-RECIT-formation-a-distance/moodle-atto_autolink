@@ -1,9 +1,7 @@
 //////////////////////////////////////////////////////////////
 // Components
 //////////////////////////////////////////////////////////////
-*[data-alert="success"]{background-color: #dff0d8 !important; color: #3c763d !important; }
-*[data-alert="error"]{background-color: #f2dede !important; color: #a94442 !important; }
-*[data-alert="warning"]{background-color: #fcf8e3 !important; color: #8a6d3b !important; }
+
 
 //////////////////////////////////////////////////////////////
 // VisualFeedback
@@ -15,12 +13,6 @@
 .VisualFeedback[data-feedback-type="error"]{overflow: auto; top: 50%; left: 50%; transform: translate(-50%,-50%);}
 .VisualFeedback[data-feedback-type="warning"]{top: auto; left: auto; right: 0; bottom: 0;}
 .VisualFeedback[data-feedback-type="info"]{top: auto; left: auto; right: 0; bottom: 0;}
-
-//////////////////////////////////////////////////////////////
-// InputNumber
-//////////////////////////////////////////////////////////////
-.InputNumber{    text-align: right;}
-
 
 //////////////////////////////////////////////////////////////
 // Loading

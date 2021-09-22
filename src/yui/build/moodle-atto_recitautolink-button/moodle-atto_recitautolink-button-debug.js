@@ -35,8 +35,8 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         e.preventDefault();
        
         var url = M.cfg.wwwroot;
-        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js";
-        var css = url +"/lib/editor/atto/plugins/recitautolink/build/index.css";
+        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js?v=55";
+        //var css = url +"/lib/editor/atto/plugins/recitautolink/build/index.css";
         
 
         var content = document.createElement('div');
@@ -50,10 +50,10 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
             script.setAttribute('id', 'recitautolink');
             script.setAttribute('type', 'text/javascript');
             document.getElementsByTagName('head')[0].appendChild(script);
-            script = document.createElement('link');
+            /*script = document.createElement('link');
             script.setAttribute('href', css);
             script.setAttribute('rel', 'stylesheet');
-            document.getElementsByTagName('head')[0].appendChild(script);
+            document.getElementsByTagName('head')[0].appendChild(script);*/
         }else{
             this.loadUi();
         }
@@ -92,8 +92,8 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         let that = this;
         $(".modal-backdrop").click(() => $(this.popup).modal('hide'));
         $(modal).on('hidden.bs.modal', function (e) {
-            that.destroy()
-        })
+            that.destroy();
+        });
       },
 
       destroy: function(){

@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->version   = 2021061400;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2018050800;        // Requires this Moodle version.
 $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
-$plugin->release = 'R13-V1.13.0'; 
+$plugin->release = 'R14-V1.14.0'; 
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [
     'local_recitcommon' => 2021082000,
