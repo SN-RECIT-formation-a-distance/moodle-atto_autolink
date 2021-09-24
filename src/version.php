@@ -22,13 +22,13 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021061400;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2021092400;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2018050800;        // Requires this Moodle version.
 $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
-$plugin->release = 'R14-V1.14.0'; 
+$plugin->release = 'R14-V1.0'; 
 // This is a list of plugins, this plugin depends on (and their versions).                                                          
 $plugin->dependencies = [
-    'local_recitcommon' => 2021082000,
-	'filter_recitactivity' => 2021050400
+    'local_recitcommon' => 2021092400,
+	'filter_recitactivity' => 2021092400
 ];
 $plugin->maturity = MATURITY_ALPHA; // MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC or MATURITY_STABLE
