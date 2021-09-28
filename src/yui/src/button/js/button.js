@@ -33,7 +33,7 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         e.preventDefault();
        
         var url = M.cfg.wwwroot;
-        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js?v=55";
+        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js";
         //var css = url +"/lib/editor/atto/plugins/recitautolink/build/index.css";
         
 
@@ -61,12 +61,13 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
     createPopup: function(content) {        
         let modal = document.createElement('div');
         modal.classList.add('modal', 'fade', 'autolink_popup');
+        modal.setAttribute('style', 'overflow-y: hidden;');
         let inner2 = document.createElement('div');
         inner2.classList.add('modal-dialog');
         modal.appendChild(inner2);
         let inner = document.createElement('div');
         inner.classList.add('modal-content');
-        inner.setAttribute('style', 'min-height:500px;min-width:500px;padding:15px');
+        inner.setAttribute('style', 'min-height:500px;width:600px;padding:10px');
         inner2.appendChild(inner);
 
         let header = document.createElement('div');

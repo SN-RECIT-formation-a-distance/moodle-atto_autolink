@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Tabs, Tab, Button, Form, ButtonGroup, Card} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
-import { FeedbackCtrl } from '../libs/components/Feedback';
 import { ComboBox } from '../libs/components/ComboBox';
 
 
@@ -21,14 +20,14 @@ export class GeneratorView extends Component {
         if (!this.state.initialized) return null;
         let main = 
         <Card>
-            <Card.Body>
+            <Card.Body style={{maxHeight: 490, overflowY: "auto"}}>
                 <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
-                    {Options.map((p, index) => (
-                        <Tab title={p.name} eventKey={p.key} key={index}>
-                            {p.options.map((o, i) => {
-                                return this.getInput(o, i);
+                    {Options.map((item, index) => (
+                        <Tab title={item.name} eventKey={item.key} key={index}>
+                            {item.options.map((input, i) => {
+                                return this.getInput(input, i);
                             })}
-                            {(p.key == 'activity' || p.key == 'section') &&
+                            {(item.key == 'activity' || item.key == 'section') &&
                             <>
                                 <hr/>
                                 <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
@@ -78,10 +77,7 @@ export class GeneratorView extends Component {
     }
 
     setTab(k){
-        let validated = false;
-        this.currentTab = this.getTab(k);
-        if (this.currentTab && this.currentTab.singleInput) validated = true;
-        this.setState({activeTab: k, data: {}, validated: validated});
+        this.setState({activeTab: k, data: {}, validated: false});
         this.resetValues();
     }
 
@@ -119,36 +115,23 @@ export class GeneratorView extends Component {
     onChange(e, option){
         let data = this.state.data;
         let values = this.state.values;
-        let name = e.target.name;
-        let radio = false;
-        if (e.target.getAttribute){
-            name = e.target.getAttribute('data-key');
-            if (e.target.getAttribute('data-radio')) radio = true;
-        }
+        let name = option.key;
+        let validated = this.state.validated;
+
         let opt = option.getOption(e.target);
         
-        if (option.required){
-            this.setState({validated: true});
+        if((option.required) || (['infocourse', 'infostudent', 'infoteacher1', 'infoteacher2', 'infoteacher3'].includes(option.name))){
+            validated = true;
         }
-        if (this.currentTab.singleInput){
-            data = {};
-            values = this.resetValues();
-        }
-        if (radio){
-            let els = document.querySelectorAll("input[name="+e.target.name+"]");
-            for (let el of els){
-                let n = el.getAttribute('data-key');
-                values[n] = false;
-            }
-            values[name] = true;
-        }else if (e.target.type == 'checkbox'){
+      
+        if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
             values[name] = e.target.checked;
         }else{
             values[name] = e.target.value;
         }
         
         data[name] = {opt: opt, required: option.required};
-        this.setState({data: data, values: values});
+        this.setState({data: data, values: values, validated: validated});
 
         if (name == 'btn'){
             this.generateCSSButton('primary');
@@ -159,15 +142,15 @@ export class GeneratorView extends Component {
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
         if (option.input == 'checkbox'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="checkbox" label={option.name} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Check  key={key} id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
         }
         
         if (option.input == 'radio'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Check type="checkbox" label={option.name} name={option.group} data-key={option.key} data-radio="true" onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Check  key={key} id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
         }
         
         if (option.input == 'text'){
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -175,18 +158,18 @@ export class GeneratorView extends Component {
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
             }
-            return <Form.Group className="mb-3" key={key} controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group  key={key} className="mb-3"  controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         
         if (option.input == 'separator'){
-            return <Form.Group className="mb-3" key={key}><hr/></Form.Group>;
+            return <Form.Group  key={key}><hr/></Form.Group>;
         }
     }
 
     generateCode(save, data){
         if(!this.state.validated && save){
-            FeedbackCtrl.instance.showError($glVars.i18n.appName, "Champs manquant");
+            alert("Le code d'intégration n'est pas valide.");
             return;
         }
 
@@ -263,7 +246,7 @@ export class GeneratorView extends Component {
         
         $glVars.webApi.getCmList($glVars.classHandler.get("courseid"), function(result){
             if(!result.success){
-                FeedbackCtrl.instance.showError($glVars.i18n.appName, result.msg);
+                alert(result.msg);
                 return;
             }
 
@@ -276,7 +259,7 @@ export class GeneratorView extends Component {
         
         $glVars.webApi.getSectionList($glVars.classHandler.get("courseid"), function(result){
             if(!result.success){
-                FeedbackCtrl.instance.showError($glVars.i18n.appName, result.msg);
+                alert(result.msg);
                 return;
             }
 
@@ -289,7 +272,7 @@ export class GeneratorView extends Component {
         
         $glVars.webApi.getH5PList($glVars.classHandler.get("courseid"), function(result){
             if(!result.success){
-                FeedbackCtrl.instance.showError($glVars.i18n.appName, result.msg);
+                alert(result.msg);
                 return;
             }
 

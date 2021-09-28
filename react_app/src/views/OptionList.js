@@ -30,10 +30,10 @@ export const Options = [
                 }
             },
             {
-                group: 'action',
+                name: 'opening',
                 input: 'radio',
                 default: true,
-                name: 'Ouvrir dans le même onglet',
+                label: 'Même onglet',
                 key: 'oldtab',
                 getOption: function(input){
                     if (input.checked){
@@ -42,9 +42,9 @@ export const Options = [
                 }
             },
             {
+                name: 'opening',
                 input: 'radio',
-                group: 'action',
-                name: 'Ouvrir dans un nouvel onglet',
+                label: 'Nouvel onglet',
                 key: 'newtab',
                 getOption: function(input){
                     if (input.checked){
@@ -53,9 +53,9 @@ export const Options = [
                 }
             },
             {
-                group: 'action',
+                name: 'opening',
                 input: 'radio',
-                name: 'Ouvrir dans un modal',
+                label: 'Modal',
                 key: 'modal',
                 getOption: function(input){
                     if (input.checked){
@@ -67,8 +67,9 @@ export const Options = [
                 input: 'separator',
             },
             {
+                name: 'otheroptions',
                 input: 'checkbox',
-                name: 'Afficher icône',
+                label: 'Icône',
                 key: 'icon',
                 getOption: function(input){
                     if (input.checked){
@@ -77,8 +78,9 @@ export const Options = [
                 }
             },
             {
+                name: 'otheroptions',
                 input: 'checkbox',
-                name: 'Afficher case à cocher pour completion',
+                label: 'Case à cocher pour completion',
                 key: 'completion',
                 getOption: function(input){
                     if (input.checked){
@@ -90,8 +92,9 @@ export const Options = [
                 input: 'separator',
             },
             {
+                name: 'otheroptions',
                 input: 'checkbox',
-                name: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -138,10 +141,10 @@ export const Options = [
                 }
             },
             {
-                group: 'action',
+                name: 'opening',
                 input: 'radio',
                 default: true,
-                name: 'Ouvrir dans le même onglet',
+                label: 'Même onglet',
                 key: 'oldtab',
                 getOption: function(input){
                     if (input.checked){
@@ -150,9 +153,9 @@ export const Options = [
                 }
             },
             {
-                group: 'action',
+                name: 'opening',
                 input: 'radio',
-                name: 'Ouvrir dans un nouvel onglet',
+                label: 'Nouvel onglet',
                 key: 'newtab',
                 getOption: function(input){
                     if (input.checked){
@@ -161,9 +164,9 @@ export const Options = [
                 }
             },
             {
-                group: 'action',
+                name: 'opening',
                 input: 'radio',
-                name: 'Ouvrir dans un modal',
+                label: 'Modal',
                 key: 'modal',
                 getOption: function(input){
                     if (input.checked){
@@ -175,8 +178,9 @@ export const Options = [
                 input: 'separator',
             },
             {
+                name: 'otheroptions',
                 input: 'checkbox',
-                name: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -218,11 +222,11 @@ export const Options = [
     {
         name: 'Information',
         key: 'info',
-        singleInput: true,
         options: [
             {
+                name: 'infocourse',
                 input: 'checkbox',
-                name: 'Nom du cours',
+                label: 'Nom du cours',
                 key: 'info1',
                 getOption: function(input){
                     if (input.checked){
@@ -231,8 +235,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infocourse',
                 input: 'checkbox',
-                name: 'Nom court du cours',
+                label: 'Nom court du cours',
                 key: 'info2',
                 getOption: function(input){
                     if (input.checked){
@@ -246,8 +251,9 @@ export const Options = [
             },
 
             {
+                name: 'infostudent',
                 input: 'checkbox',
-                name: 'Prénom de l\'élève',
+                label: 'Prénom de l\'élève',
                 key: 'info3',
                 getOption: function(input){
                     if (input.checked){
@@ -256,8 +262,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infostudent',
                 input: 'checkbox',
-                name: 'Nom de l\'élève',
+                label: 'Nom de l\'élève',
                 key: 'info4',
                 getOption: function(input){
                     if (input.checked){
@@ -266,8 +273,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infostudent',
                 input: 'checkbox',
-                name: 'Email de l\'élève',
+                label: 'Email de l\'élève',
                 key: 'info5',
                 getOption: function(input){
                     if (input.checked){
@@ -276,8 +284,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infostudent',
                 input: 'checkbox',
-                name: 'Avatar de l\'élève',
+                label: 'Avatar de l\'élève',
                 key: 'info6',
                 getOption: function(input){
                     if (input.checked){
@@ -291,8 +300,9 @@ export const Options = [
             },
 
             {
+                name: 'infoteacher1',
                 input: 'checkbox',
-                name: 'Prénom de l\'enseignant #1',
+                label: 'Prénom de l\'enseignant #1',
                 key: 'info7',
                 getOption: function(input){
                     if (input.checked){
@@ -301,8 +311,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher1',
                 input: 'checkbox',
-                name: 'Nom de l\'enseignant #1',
+                label: 'Nom de l\'enseignant #1',
                 key: 'info8',
                 getOption: function(input){
                     if (input.checked){
@@ -311,8 +322,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher1',
                 input: 'checkbox',
-                name: 'Email de l\'enseignant #1',
+                label: 'Email de l\'enseignant #1',
                 key: 'info9',
                 getOption: function(input){
                     if (input.checked){
@@ -321,8 +333,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher1',
                 input: 'checkbox',
-                name: 'Avatar de l\'enseignant #1',
+                label: 'Avatar de l\'enseignant #1',
                 key: 'info18',
                 getOption: function(input){
                     if (input.checked){
@@ -336,8 +349,9 @@ export const Options = [
             },
 
             {
+                name: 'infoteacher2',
                 input: 'checkbox',
-                name: 'Prénom de l\'enseignant #2',
+                label: 'Prénom de l\'enseignant #2',
                 key: 'info10',
                 getOption: function(input){
                     if (input.checked){
@@ -346,8 +360,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher2',
                 input: 'checkbox',
-                name: 'Nom de l\'enseignant #2',
+                label: 'Nom de l\'enseignant #2',
                 key: 'info11',
                 getOption: function(input){
                     if (input.checked){
@@ -356,8 +371,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher2',
                 input: 'checkbox',
-                name: 'Email de l\'enseignant #2',
+                label: 'Email de l\'enseignant #2',
                 key: 'info12',
                 getOption: function(input){
                     if (input.checked){
@@ -366,8 +382,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher2',
                 input: 'checkbox',
-                name: 'Avatar de l\'enseignant #2',
+                label: 'Avatar de l\'enseignant #2',
                 key: 'info17',
                 getOption: function(input){
                     if (input.checked){
@@ -381,8 +398,9 @@ export const Options = [
             },
 
             {
+                name: 'infoteacher3',
                 input: 'checkbox',
-                name: 'Prénom de l\'enseignant #3',
+                label: 'Prénom de l\'enseignant #3',
                 key: 'info13',
                 getOption: function(input){
                     if (input.checked){
@@ -391,8 +409,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher3',
                 input: 'checkbox',
-                name: 'Nom de l\'enseignant #3',
+                label: 'Nom de l\'enseignant #3',
                 key: 'info14',
                 getOption: function(input){
                     if (input.checked){
@@ -401,8 +420,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher3',
                 input: 'checkbox',
-                name: 'Email de l\'enseignant #3',
+                label: 'Email de l\'enseignant #3',
                 key: 'info15',
                 getOption: function(input){
                     if (input.checked){
@@ -411,8 +431,9 @@ export const Options = [
                 }
             },
             {
+                name: 'infoteacher3',
                 input: 'checkbox',
-                name: 'Avatar de l\'enseignant #3',
+                label: 'Avatar de l\'enseignant #3',
                 key: 'info16',
                 getOption: function(input){
                     if (input.checked){
