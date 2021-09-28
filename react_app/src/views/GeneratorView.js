@@ -19,8 +19,8 @@ export class GeneratorView extends Component {
     render() {       
         if (!this.state.initialized) return null;
         let main = 
-        <Card>
-            <Card.Body style={{maxHeight: 490, overflowY: "auto"}}>
+        <Card style={{maxHeight: 470}}>
+            <Card.Body style={{overflowY: "auto"}} >
                 <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
                     {Options.map((item, index) => (
                         <Tab title={item.name} eventKey={item.key} key={index}>
@@ -142,11 +142,11 @@ export class GeneratorView extends Component {
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
         if (option.input == 'checkbox'){
-            return <Form.Check  key={key} id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
+            return <Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
         }
         
         if (option.input == 'radio'){
-            return <Form.Check  key={key} id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
+            return <Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
         }
         
         if (option.input == 'text'){

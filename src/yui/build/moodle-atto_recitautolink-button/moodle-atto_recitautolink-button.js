@@ -35,7 +35,7 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         e.preventDefault();
        
         var url = M.cfg.wwwroot;
-        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js?v=71";
+        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js";
         //var css = url +"/lib/editor/atto/plugins/recitautolink/build/index.css";
         
 
@@ -69,7 +69,7 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         modal.appendChild(inner2);
         let inner = document.createElement('div');
         inner.classList.add('modal-content');
-        inner.setAttribute('style', 'min-height:500px;width:600px;padding:10px');
+        inner.setAttribute('style', 'width:600px;padding:10px');
         inner2.appendChild(inner);
 
         let header = document.createElement('div');
