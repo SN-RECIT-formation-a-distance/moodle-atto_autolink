@@ -194,6 +194,7 @@ export class GeneratorView extends Component {
     }
 
     generateTestCode(){
+        if (!window.confirm('Êtes-vous sûre de vouloir générer tous les possibilités de code?')) return;
         let code = "";
         for (let i in Options){
             for (let v of Options[i].options){
