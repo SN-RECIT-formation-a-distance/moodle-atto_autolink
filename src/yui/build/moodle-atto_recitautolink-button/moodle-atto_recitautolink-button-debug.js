@@ -129,4 +129,4 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
 });
 
 
-}, '@VERSION@');
+}, '@VERSION@', {"requires": ["moodle-editor_atto-plugin"]});

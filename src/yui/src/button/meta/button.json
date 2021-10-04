@@ -1,5 +1,5 @@
 {
-    "moodle-atto_reciteditor-button": {
+    "moodle-atto_recitautolink-button": {
         "requires": [
             "moodle-editor_atto-plugin"
         ]
