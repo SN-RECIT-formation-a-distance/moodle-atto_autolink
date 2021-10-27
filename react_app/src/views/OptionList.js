@@ -222,6 +222,7 @@ export const Options = [
     {
         name: 'Information',
         key: 'info',
+        singleInput: true,
         options: [
             {
                 name: 'infocourse',

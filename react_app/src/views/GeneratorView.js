@@ -227,7 +227,11 @@ export class GeneratorView extends Component {
             obj = {checked: true}
         }
         if (option.input == 'text'){
-            obj = {value: 'btn btn-secondary'}
+            if (option.key == 'linktext'){
+                obj = {value: 'Commencer'}
+            }else{
+                obj = {value: 'btn btn-secondary'}
+            }
         }
         if (option.input == 'select'){
             let dataProvider = [];
