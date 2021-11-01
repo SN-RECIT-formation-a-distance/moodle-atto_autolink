@@ -45,7 +45,7 @@ function atto_recitautolink_strings_for_js() {
  */
 function atto_recitautolink_params_for_js($elementid, $options, $fpoptions) {
     global $PAGE;
-    if (!isset($PAGE->course->id)) {
+    if (!isset($PAGE->course->id) || $PAGE->course->id <= 1) {
         return array('courseid' => null);
     }
 
