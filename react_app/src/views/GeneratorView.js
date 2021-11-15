@@ -102,7 +102,7 @@ export class GeneratorView extends Component {
                         values[v.key] = "";
                     }
                     if (v.default){
-                        values[v.key] = v.default;;
+                        values[v.key] = v.default;
                     }
                 }
             }
@@ -200,12 +200,26 @@ export class GeneratorView extends Component {
             for (let v of Options[i].options){
                 let opt = this.getTestOption(Options[i], v);
                 if (opt.length > 0 && opt != "[[]]"){
-                    code += "<p>"+opt+" => "+opt.replace('[', '{')+"</p>";
+                    code += this.formatTestOption(opt);
                 }
             }
         }
+
+        //Hardcoded tests for edge cases
+        let dataProvider = this.state.cmList;
+        let obj = dataProvider[Math.floor(Math.random() * dataProvider.length)].value;
+        code += this.formatTestOption('[[desc:"Texte du lien"/c/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/c/i/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/i/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/c/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/i/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/c/i/class:"btn btn-primary"/'+obj+']]');
         
         this.props.onClose(code);
+    }
+
+    formatTestOption(opt){
+        return "<p>"+opt+" => "+opt.replace('[', '{')+"</p>";
     }
 
     getTestOption(tab, option){
