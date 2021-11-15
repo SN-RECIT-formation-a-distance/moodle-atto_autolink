@@ -196,14 +196,6 @@ export class GeneratorView extends Component {
     generateTestCode(){
         if (!window.confirm('Êtes-vous sûre de vouloir générer tous les possibilités de code?')) return;
         let code = "";
-        for (let i in Options){
-            for (let v of Options[i].options){
-                let opt = this.getTestOption(Options[i], v);
-                if (opt.length > 0 && opt != "[[]]"){
-                    code += this.formatTestOption(opt);
-                }
-            }
-        }
 
         //Hardcoded tests for edge cases
         let dataProvider = this.state.cmList;
@@ -214,6 +206,16 @@ export class GeneratorView extends Component {
         code += this.formatTestOption('[[desc:"Texte du lien"/c/class:"btn btn-primary"/'+obj+']]');
         code += this.formatTestOption('[[desc:"Texte du lien"/i/class:"btn btn-primary"/'+obj+']]');
         code += this.formatTestOption('[[desc:"Texte du lien"/c/i/class:"btn btn-primary"/'+obj+']]');
+        
+        for (let i in Options){
+            for (let v of Options[i].options){
+                let opt = this.getTestOption(Options[i], v);
+                if (opt.length > 0 && opt != "[[]]"){
+                    code += this.formatTestOption(opt);
+                }
+            }
+        }
+
         
         this.props.onClose(code);
     }
