@@ -204,7 +204,8 @@ export class GeneratorView extends Component {
         code += this.formatTestOption('[[desc:"Texte du lien"/c/i/'+obj+']]');
         code += this.formatTestOption('[[desc:"Texte du lien"/i/'+obj+']]');
         code += this.formatTestOption('[[desc:"Texte du lien"/c/class:"btn btn-primary"/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/i/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/i/b/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"Texte du lien"/i/p/class:"btn btn-primary"/'+obj+']]');
         code += this.formatTestOption('[[desc:"Texte du lien"/c/i/class:"btn btn-primary"/'+obj+']]');
         
         for (let i in Options){
