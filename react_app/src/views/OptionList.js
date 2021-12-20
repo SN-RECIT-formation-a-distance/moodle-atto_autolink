@@ -140,7 +140,7 @@ export const Options = [
                     }
                 }
             },
-            {
+            /*{
                 name: 'opening',
                 input: 'radio',
                 default: true,
@@ -173,7 +173,7 @@ export const Options = [
                         return "/p";
                     }
                 }
-            },
+            },*/
             {
                 input: 'separator',
             },
