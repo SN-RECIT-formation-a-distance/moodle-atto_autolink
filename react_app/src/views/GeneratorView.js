@@ -3,6 +3,7 @@ import {Tabs, Tab, Button, Form, ButtonGroup, Card} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
 import { ComboBox } from '../libs/components/ComboBox';
+import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
 
 
 export class GeneratorView extends Component {
@@ -158,7 +159,7 @@ export class GeneratorView extends Component {
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
             }
-            return <Form.Group  key={key} className="mb-3"  controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBox options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group  key={key} className="mb-3"  controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBoxPlus options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         
@@ -275,7 +276,7 @@ export class GeneratorView extends Component {
 
             let list = [];
             for (let e of result.data){
-                list.push({value: e.name, text: e.name + " [" + e.modname + "]"});
+                list.push({value: e.name, label: e.name + " [" + e.modname + "]"});
             }
             that.setState({cmList: list});
         });
@@ -288,7 +289,7 @@ export class GeneratorView extends Component {
 
             let list = [];
             for (let e of result.data){
-                list.push({value: e.name, text: e.name});
+                list.push({value: e.name, label: e.name});
             }
             that.setState({sectionList: list});
         });
@@ -301,7 +302,7 @@ export class GeneratorView extends Component {
 
             let list = [];
             for (let e of result.data){
-                list.push({value: e.name, text: e.name});
+                list.push({value: e.name, label: e.name});
             }
             that.setState({h5pList: list});
         });
