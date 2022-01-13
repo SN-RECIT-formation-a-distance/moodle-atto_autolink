@@ -20,7 +20,7 @@ export class GeneratorView extends Component {
     render() {       
         if (!this.state.initialized) return null;
         let main = 
-        <Card style={{maxHeight: 450, minHeight: 450}}> 
+        <Card style={{maxHeight: 650, minHeight: 500}}> 
             <Card.Body style={{overflowY: "auto"}} >
                 <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
                     {Options.map((item, index) => (
