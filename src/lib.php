@@ -15,9 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
  *
- * @package    atto_reciteditor
+ * @package    atto_recitautolink
  * @copyright  recit
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,7 +28,39 @@ defined('MOODLE_INTERNAL') || die();
 function atto_recitautolink_strings_for_js() {
     global $PAGE; 
 
-    $PAGE->requires->strings_for_js(array('pluginname',
+    $PAGE->requires->strings_for_js(array(
+                                            'pluginname',
+                                            'activity',
+                                            'activities',
+                                            'generatetestcode',
+                                            'insert',
+                                            'cancel',
+                                            'csspreview',
+                                            'getstarted',
+                                            'testconfirm',
+                                            'linktext',
+                                            'invalidcode',
+                                            'button',
+                                            'cssclass',
+                                            'completioncheckbox',
+                                            'section',
+                                            'sections',
+                                            'information',
+                                            'icon',
+                                            'modal',
+                                            'sametab',
+                                            'newtab',
+                                            'h5p',
+                                            'coursename',
+                                            'shortcoursename',
+                                            'studentfirstname',
+                                            'studentlastname',
+                                            'studentemail',
+                                            'studentavatar',
+                                            'teacherfirstname',
+                                            'teacherlastname',
+                                            'teacheremail',
+                                            'teacheravatar',
                                         ),
                                     'atto_recitautolink');
 }

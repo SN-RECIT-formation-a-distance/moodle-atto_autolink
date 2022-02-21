@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Options = [
     {
-        name: 'Activités',
+        name: M.util.get_string('activities', 'atto_recitautolink'),
         key: 'activity',
         options: [
             {
                 input: 'select',
-                name: 'Activité',
+                name: M.util.get_string('activity', 'atto_recitautolink'),
                 key: 'activity',
                 dataProvider: 'cmList',
                 required: true,
@@ -21,7 +21,7 @@ export const Options = [
             },
             {
                 input: 'text',
-                name: 'Texte du lien',
+                name: M.util.get_string('linktext', 'atto_recitautolink'),
                 key: 'linktext',
                 getOption: function(input){
                     if (input.value.length > 0){
@@ -33,7 +33,7 @@ export const Options = [
                 name: 'opening',
                 input: 'radio',
                 default: true,
-                label: 'Même onglet',
+                label: M.util.get_string('sametab', 'atto_recitautolink'),
                 key: 'oldtab',
                 getOption: function(input){
                     if (input.checked){
@@ -44,7 +44,7 @@ export const Options = [
             {
                 name: 'opening',
                 input: 'radio',
-                label: 'Nouvel onglet',
+                label: M.util.get_string('newtab', 'atto_recitautolink'),
                 key: 'newtab',
                 getOption: function(input){
                     if (input.checked){
@@ -55,7 +55,7 @@ export const Options = [
             {
                 name: 'opening',
                 input: 'radio',
-                label: 'Modal',
+                label: M.util.get_string('modal', 'atto_recitautolink'),
                 key: 'modal',
                 getOption: function(input){
                     if (input.checked){
@@ -69,7 +69,7 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: 'Icône',
+                label: M.util.get_string('icon', 'atto_recitautolink'),
                 key: 'icon',
                 getOption: function(input){
                     if (input.checked){
@@ -80,7 +80,7 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: 'Case à cocher pour completion',
+                label: M.util.get_string('completioncheckbox', 'atto_recitautolink'),
                 key: 'completion',
                 getOption: function(input){
                     if (input.checked){
@@ -94,7 +94,7 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: <span>{M.util.get_string('button', 'atto_recitautolink')} <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -104,7 +104,7 @@ export const Options = [
             },
             {
                 input: 'text',
-                name: 'Classe CSS',
+                name: M.util.get_string('cssclass', 'atto_recitautolink'),
                 key: 'css',
                 getOption: function(input){
                     if (input.value.length > 0){
@@ -115,12 +115,12 @@ export const Options = [
         ]
     },
     {
-        name: 'Sections',
+        name: M.util.get_string('sections', 'atto_recitautolink'),
         key: 'section',
         options: [
             {
                 input: 'select',
-                name: 'Section',
+                name: M.util.get_string('section', 'atto_recitautolink'),
                 key: 'section',
                 dataProvider: 'sectionList',
                 required: true,
@@ -132,7 +132,7 @@ export const Options = [
             },
             {
                 input: 'text',
-                name: 'Texte du lien',
+                name: M.util.get_string('linktext', 'atto_recitautolink'),
                 key: 'linktext',
                 getOption: function(input){
                     if (input.value.length > 0){
@@ -180,7 +180,7 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: <span>Bouton <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: <span>{M.util.get_string('button', 'atto_recitautolink')} <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -190,7 +190,7 @@ export const Options = [
             },
             {
                 input: 'text',
-                name: 'Classe CSS',
+                name: M.util.get_string('cssclass', 'atto_recitautolink'),
                 key: 'css',
                 getOption: function(input){
                     if (input.value.length > 0){
@@ -201,12 +201,12 @@ export const Options = [
         ]
     },
     {
-        name: 'H5P',
+        name: M.util.get_string('h5p', 'atto_recitautolink'),
         key: 'h5p',
         options: [
             {
                 input: 'select',
-                name: 'H5P',
+                name: M.util.get_string('h5p', 'atto_recitautolink'),
                 key: 'h5p',
                 dataProvider: 'h5pList',
                 required: true,
@@ -220,14 +220,14 @@ export const Options = [
         ]
     },
     {
-        name: 'Information',
+        name: M.util.get_string('information', 'atto_recitautolink'),
         key: 'info',
         singleInput: true,
         options: [
             {
                 name: 'infocourse',
                 input: 'checkbox',
-                label: 'Nom du cours',
+                label: M.util.get_string('coursename', 'atto_recitautolink'),
                 key: 'info1',
                 getOption: function(input){
                     if (input.checked){
@@ -238,7 +238,7 @@ export const Options = [
             {
                 name: 'infocourse',
                 input: 'checkbox',
-                label: 'Nom court du cours',
+                label: M.util.get_string('shortcoursename', 'atto_recitautolink'),
                 key: 'info2',
                 getOption: function(input){
                     if (input.checked){
@@ -254,7 +254,7 @@ export const Options = [
             {
                 name: 'infostudent',
                 input: 'checkbox',
-                label: 'Prénom de l\'élève',
+                label: M.util.get_string('studentfirstname', 'atto_recitautolink'),
                 key: 'info3',
                 getOption: function(input){
                     if (input.checked){
@@ -265,7 +265,7 @@ export const Options = [
             {
                 name: 'infostudent',
                 input: 'checkbox',
-                label: 'Nom de l\'élève',
+                label: M.util.get_string('studentlastname', 'atto_recitautolink'),
                 key: 'info4',
                 getOption: function(input){
                     if (input.checked){
@@ -276,7 +276,7 @@ export const Options = [
             {
                 name: 'infostudent',
                 input: 'checkbox',
-                label: 'Email de l\'élève',
+                label: M.util.get_string('studentemail', 'atto_recitautolink'),
                 key: 'info5',
                 getOption: function(input){
                     if (input.checked){
@@ -287,7 +287,7 @@ export const Options = [
             {
                 name: 'infostudent',
                 input: 'checkbox',
-                label: 'Avatar de l\'élève',
+                label: M.util.get_string('studentavatar', 'atto_recitautolink'),
                 key: 'info6',
                 getOption: function(input){
                     if (input.checked){
@@ -303,7 +303,7 @@ export const Options = [
             {
                 name: 'infoteacher1',
                 input: 'checkbox',
-                label: 'Prénom de l\'enseignant #1',
+                label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #1',
                 key: 'info7',
                 getOption: function(input){
                     if (input.checked){
@@ -314,7 +314,7 @@ export const Options = [
             {
                 name: 'infoteacher1',
                 input: 'checkbox',
-                label: 'Nom de l\'enseignant #1',
+                label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #1',
                 key: 'info8',
                 getOption: function(input){
                     if (input.checked){
@@ -325,7 +325,7 @@ export const Options = [
             {
                 name: 'infoteacher1',
                 input: 'checkbox',
-                label: 'Email de l\'enseignant #1',
+                label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #1',
                 key: 'info9',
                 getOption: function(input){
                     if (input.checked){
@@ -336,7 +336,7 @@ export const Options = [
             {
                 name: 'infoteacher1',
                 input: 'checkbox',
-                label: 'Avatar de l\'enseignant #1',
+                label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #1',
                 key: 'info18',
                 getOption: function(input){
                     if (input.checked){
@@ -352,7 +352,7 @@ export const Options = [
             {
                 name: 'infoteacher2',
                 input: 'checkbox',
-                label: 'Prénom de l\'enseignant #2',
+                label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #2',
                 key: 'info10',
                 getOption: function(input){
                     if (input.checked){
@@ -363,7 +363,7 @@ export const Options = [
             {
                 name: 'infoteacher2',
                 input: 'checkbox',
-                label: 'Nom de l\'enseignant #2',
+                label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #2',
                 key: 'info11',
                 getOption: function(input){
                     if (input.checked){
@@ -374,7 +374,7 @@ export const Options = [
             {
                 name: 'infoteacher2',
                 input: 'checkbox',
-                label: 'Email de l\'enseignant #2',
+                label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #2',
                 key: 'info12',
                 getOption: function(input){
                     if (input.checked){
@@ -385,7 +385,7 @@ export const Options = [
             {
                 name: 'infoteacher2',
                 input: 'checkbox',
-                label: 'Avatar de l\'enseignant #2',
+                label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #2',
                 key: 'info17',
                 getOption: function(input){
                     if (input.checked){
@@ -401,7 +401,7 @@ export const Options = [
             {
                 name: 'infoteacher3',
                 input: 'checkbox',
-                label: 'Prénom de l\'enseignant #3',
+                label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #3',
                 key: 'info13',
                 getOption: function(input){
                     if (input.checked){
@@ -412,7 +412,7 @@ export const Options = [
             {
                 name: 'infoteacher3',
                 input: 'checkbox',
-                label: 'Nom de l\'enseignant #3',
+                label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #3',
                 key: 'info14',
                 getOption: function(input){
                     if (input.checked){
@@ -423,7 +423,7 @@ export const Options = [
             {
                 name: 'infoteacher3',
                 input: 'checkbox',
-                label: 'Email de l\'enseignant #3',
+                label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #3',
                 key: 'info15',
                 getOption: function(input){
                     if (input.checked){
@@ -434,7 +434,7 @@ export const Options = [
             {
                 name: 'infoteacher3',
                 input: 'checkbox',
-                label: 'Avatar de l\'enseignant #3',
+                label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #3',
                 key: 'info16',
                 getOption: function(input){
                     if (input.checked){

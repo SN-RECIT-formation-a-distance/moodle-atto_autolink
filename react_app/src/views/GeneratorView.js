@@ -31,7 +31,7 @@ export class GeneratorView extends Component {
                             {(item.key == 'activity' || item.key == 'section') &&
                             <>
                                 <hr/>
-                                <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>Aperçu du CSS</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
+                                <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>{M.util.get_string('csspreview', 'atto_recitautolink')}</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
                             </>}                        
                         </Tab>
                     ))}
@@ -39,11 +39,11 @@ export class GeneratorView extends Component {
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">
                 <ButtonGroup>
-                    <Button onClick={this.generateTestCode}>Générer cas de tests</Button>
+                    <Button onClick={this.generateTestCode}>{M.util.get_string('generatetestcode', 'atto_recitautolink')}</Button>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Button variant="secondary" onClick={() => this.props.onClose()}>Annuler</Button>
-                    <Button onClick={this.generateCode}>Insérer</Button>
+                    <Button variant="secondary" onClick={() => this.props.onClose()}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                    <Button onClick={this.generateCode}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
                 </ButtonGroup>
             </Card.Footer>
         </Card>;
@@ -170,7 +170,7 @@ export class GeneratorView extends Component {
 
     generateCode(save, data){
         if(!this.state.validated && save){
-            alert("Le code d'intégration n'est pas valide.");
+            alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
             return;
         }
 
@@ -195,20 +195,20 @@ export class GeneratorView extends Component {
     }
 
     generateTestCode(){
-        if (!window.confirm('Êtes-vous sûre de vouloir générer tous les possibilités de code?')) return;
+        if (!window.confirm(M.util.get_string('testconfirm', 'atto_recitautolink'))) return;
         let code = "";
 
         //Hardcoded tests for edge cases
         let dataProvider = this.state.cmList;
         let obj = dataProvider[Math.floor(Math.random() * dataProvider.length)].value;
-        code += this.formatTestOption('[[desc:"Texte du lien"/c/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/c/i/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/i/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/c/class:"btn btn-primary"/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/i/b/class:"btn btn-primary"/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/i/p/class:"btn btn-primary"/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/c/i/class:"btn btn-primary"/'+obj+']]');
-        code += this.formatTestOption('[[desc:"Texte du lien"/c/i/p/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/c/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/c/i/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/i/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/c/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/i/b/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/i/p/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/c/i/class:"btn btn-primary"/'+obj+']]');
+        code += this.formatTestOption('[[desc:"'+M.util.get_string('linktext', 'atto_recitautolink')+'"/c/i/p/class:"btn btn-primary"/'+obj+']]');
         
         for (let i in Options){
             for (let v of Options[i].options){
@@ -247,7 +247,7 @@ export class GeneratorView extends Component {
         }
         if (option.input == 'text'){
             if (option.key == 'linktext'){
-                obj = {value: 'Commencer'}
+                obj = {value: M.util.get_string('getstarted', 'atto_recitautolink')}
             }else{
                 obj = {value: 'btn btn-secondary'}
             }
