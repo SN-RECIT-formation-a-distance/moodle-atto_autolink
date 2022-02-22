@@ -28,19 +28,21 @@ export class AppWebApi extends WebApi
         }
     }
 
+    queryMoodle(methodName, args, onSuccess){
+        let data = {index:0, args:args, methodname: methodName};
+        this.post(this.gateway + "&info=" + methodName, [data], onSuccess);
+    }
+
     getCmList(cId, onSuccess){
-        let data = {cId: cId, service: "getCmList"};
-        this.post(this.gateway, data, onSuccess);
+        this.queryMoodle('atto_recitautolink_get_cm_list', {courseid: parseInt(cId)}, onSuccess);
     }
 
     getSectionList(cId, onSuccess){
-        let data = {cId: cId, service: "getSectionList"};
-        this.post(this.gateway, data, onSuccess);
+        this.queryMoodle('atto_recitautolink_get_section_list', {courseid: parseInt(cId)}, onSuccess);
     }
 
     getH5PList(cId, onSuccess){
-        let data = {cId: cId, service: "getH5PList"};
-        this.post(this.gateway, data, onSuccess);
+        this.queryMoodle('atto_recitautolink_get_h5p_list', {courseid: parseInt(cId)}, onSuccess);
     }
 
 };

@@ -21,15 +21,20 @@
  * @copyright  2019 RECIT
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
- 
+
+namespace atto_recitautolink\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2022021200;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2020061500.00; // Moodle 3.9.0
-$plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
-$plugin->release = 'v1.15.0'; 
-// This is a list of plugins, this plugin depends on (and their versions).                                                          
-$plugin->dependencies = [
-	'filter_recitactivity' => 2022020900
-];
-$plugin->maturity = MATURITY_BETA; // MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC or MATURITY_STABLE
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

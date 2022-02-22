@@ -269,39 +269,39 @@ export class GeneratorView extends Component {
         let that = this;
         
         $glVars.webApi.getCmList($glVars.classHandler.get("courseid"), function(result){
-            if(!result.success){
-                alert(result.msg);
+            if(result.error){
+                alert(result.error);
                 return;
             }
 
             let list = [];
-            for (let e of result.data){
+            for (let e of result[0].data){
                 list.push({value: e.name, label: e.name + " [" + e.modname + "]"});
             }
             that.setState({cmList: list});
         });
         
         $glVars.webApi.getSectionList($glVars.classHandler.get("courseid"), function(result){
-            if(!result.success){
-                alert(result.msg);
+            if(result.error){
+                alert(result.error);
                 return;
             }
 
             let list = [];
-            for (let e of result.data){
+            for (let e of result[0].data){
                 list.push({value: e.name, label: e.name});
             }
             that.setState({sectionList: list});
         });
         
         $glVars.webApi.getH5PList($glVars.classHandler.get("courseid"), function(result){
-            if(!result.success){
-                alert(result.msg);
+            if(result.error){
+                alert(result.error);
                 return;
             }
 
             let list = [];
-            for (let e of result.data){
+            for (let e of result[0].data){
                 list.push({value: e.name, label: e.name});
             }
             that.setState({h5pList: list});

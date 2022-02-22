@@ -9,7 +9,7 @@ export class Options
     }
 
     static getGateway(){
-        return `${M.cfg.wwwroot}/local/recitcommon/php/CommonApi.php`;
+        return M.cfg.wwwroot + "/lib/ajax/service.php?sesskey=" + M.cfg.sesskey;
     }
     
 }
