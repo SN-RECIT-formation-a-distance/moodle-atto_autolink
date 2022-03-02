@@ -18,8 +18,8 @@
  * Atto uninstall script. Removes atto_recitautolink icon to Atto toolbar.
  *
  * @package    atto
- * @subpackage recit_editor
- * @copyright  RECITFAD
+ * @subpackage atto_recitautolink
+ * @copyright  2019 RECIT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

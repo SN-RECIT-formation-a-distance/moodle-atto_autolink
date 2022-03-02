@@ -19,7 +19,7 @@
  *
  * @package    atto
  * @subpackage atto_recitautolink
- * @copyright  RECITFAD
+ * @copyright  2019 RECIT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
