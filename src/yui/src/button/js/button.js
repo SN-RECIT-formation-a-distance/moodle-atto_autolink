@@ -55,7 +55,7 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         e.preventDefault();
        
         var url = M.cfg.wwwroot;
-        var js = url +"/lib/editor/atto/plugins/recitautolink/build/index.js";
+        var js = url +"/lib/editor/atto/plugins/recitautolink/react/build/index.js";
         //var css = url +"/lib/editor/atto/plugins/recitautolink/build/index.css";
         
 
