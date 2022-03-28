@@ -1,6 +1,6 @@
 <?php
 $string['pluginname'] = 'RÉCIT autolink';
-$string['privacymetadata'] = 'The atto_recitautolink plugin does not store any personal data.';
+$string['privacy:metadata'] = 'This plugin does not store any personal data.';
 
 $string['coursename'] = 'Course name';
 $string['shortcoursename'] = 'course short name';
