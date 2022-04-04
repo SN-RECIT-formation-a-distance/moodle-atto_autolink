@@ -20,9 +20,8 @@
  * @copyright  2019 RECIT
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
-import React, { Component } from 'react';
-import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import React, { Component, useRef } from 'react';
 
 export const Options = [
     {
@@ -116,7 +115,11 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: <span>{M.util.get_string('button', 'atto_recitautolink')} <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: M.util.get_string('button', 'atto_recitautolink'),
+                helpButton: <>
+                <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')}</a><br/>
+                <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')}</a>
+                </>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -202,7 +205,11 @@ export const Options = [
             {
                 name: 'otheroptions',
                 input: 'checkbox',
-                label: <span>{M.util.get_string('button', 'atto_recitautolink')} <a href="https://getbootstrap.com/docs/4.0/components/buttons/" target="_blank"><FontAwesomeIcon icon={faQuestionCircle}/></a></span>,
+                label: M.util.get_string('button', 'atto_recitautolink'),
+                helpButton: <>
+                <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')}</a><br/>
+                <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')}</a>
+                </>,
                 key: 'btn',
                 getOption: function(input){
                     if (input.checked){
@@ -466,4 +473,33 @@ export const Options = [
             },
         ]
     },
+    {
+        name: M.util.get_string('tests', 'atto_recitautolink'),
+        key: 'tests',
+        singleInput: true,
+        options: [
+            {
+                name: 'testcase',
+                input: 'checkbox',
+                label: M.util.get_string('generatetestcode', 'atto_recitautolink'),
+                key: 'info17',
+                ignoreTest: true,
+                getOption: function(input, obj){
+                    if (input.checked){
+                        return obj.generateTestCode();
+                    }
+                }
+            },
+            {
+                name: 'testcasedesc',
+                input: 'desc',
+                label: M.util.get_string('testcase', 'atto_recitautolink'),
+                key: 'info18',
+                getOption: function(input){
+                    return '';
+                }
+            },
+        ]
+    }
 ]
+

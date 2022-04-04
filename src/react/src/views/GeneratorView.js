@@ -20,11 +20,13 @@
  * @copyright  2019 RECIT
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
-import React, { Component } from 'react';
-import {Tabs, Tab, Button, Form, ButtonGroup, Card} from 'react-bootstrap';
+import React, { Component, useRef } from 'react';
+import {Tabs, Tab, Button, Form, ButtonGroup, Card, Overlay} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
 import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export class GeneratorView extends Component {
@@ -59,9 +61,6 @@ export class GeneratorView extends Component {
                 </Tabs>
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between">
-                <ButtonGroup>
-                    <Button onClick={this.generateTestCode}>{M.util.get_string('generatetestcode', 'atto_recitautolink')}</Button>
-                </ButtonGroup>
                 <ButtonGroup>
                     <Button variant="secondary" onClick={() => this.props.onClose()}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                     <Button onClick={this.generateCode}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
@@ -140,9 +139,9 @@ export class GeneratorView extends Component {
         let name = option.key;
         let validated = this.state.validated;
 
-        let opt = option.getOption(e.target);
+        let opt = option.getOption(e.target, this);
         
-        if((option.required) || (['infocourse', 'infostudent', 'infoteacher1', 'infoteacher2', 'infoteacher3'].includes(option.name))){
+        if((option.required) || (['infocourse', 'infostudent', 'infoteacher1', 'infoteacher2', 'infoteacher3', 'testcase'].includes(option.name))){
             validated = true;
         }
       
@@ -164,7 +163,7 @@ export class GeneratorView extends Component {
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
         if (option.input == 'checkbox'){
-            return <Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
+            return <Form.Group key={key}><Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
         }
         
         if (option.input == 'radio'){
@@ -173,6 +172,10 @@ export class GeneratorView extends Component {
         
         if (option.input == 'text'){
             return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+        }
+        
+        if (option.input == 'desc'){
+            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.label}</Form.Label></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -216,7 +219,6 @@ export class GeneratorView extends Component {
     }
 
     generateTestCode(){
-        if (!window.confirm(M.util.get_string('testconfirm', 'atto_recitautolink'))) return;
         let code = "";
 
         //Hardcoded tests for edge cases
@@ -233,15 +235,17 @@ export class GeneratorView extends Component {
         
         for (let i in Options){
             for (let v of Options[i].options){
-                let opt = this.getTestOption(Options[i], v);
-                if (opt.length > 0 && opt != "[[]]"){
-                    code += this.formatTestOption(opt);
+                if (!v.ignoreTest){
+                    let opt = this.getTestOption(Options[i], v);
+                    if (opt.length > 0 && opt != "[[]]"){
+                        code += this.formatTestOption(opt);
+                    }
                 }
             }
         }
 
         
-        this.props.onClose(code);
+        return code;
     }
 
     formatTestOption(opt){
@@ -329,5 +333,41 @@ export class GeneratorView extends Component {
         });
 
         this.setState({initialized: true});
+    }
+ 
+}
+
+export class HelpButton extends Component {
+    static defaultProps = {
+        helpText: ''
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {show: false};
+        this.target = React.createRef();
+    }
+
+
+    render(){
+        return <>
+            <a ref={this.target} href="#" onClick={() => this.setState({show: !this.state.show})}>
+                <FontAwesomeIcon icon={faQuestionCircle}/>
+            </a>
+                <div
+                    style={{
+                    position: 'absolute',
+                    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                    padding: '2px 10px',
+                    color: 'black',
+                    border: '1px solid black',
+                    borderRadius: 3,
+                    display: this.state.show ? 'block' : 'none'
+                    }}
+                >
+                    {this.props.helpText}
+                </div>
+            </>;
+
     }
 }

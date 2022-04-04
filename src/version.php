@@ -24,7 +24,7 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2022020902;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2022021200;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2020061500.00; // Moodle 3.9.0
 $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
 $plugin->release = 'v1.15.2'; 
