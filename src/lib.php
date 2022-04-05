@@ -50,6 +50,7 @@ function atto_recitautolink_strings_for_js() {
                                             'testcase',
                                             'btnlook',
                                             'btnshape',
+                                            'infobs',
                                             'icon',
                                             'modal',
                                             'sametab',

@@ -20,8 +20,8 @@
  * @copyright  2019 RECIT
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
-import React, { Component, useRef } from 'react';
-import {Tabs, Tab, Button, Form, ButtonGroup, Card, Overlay} from 'react-bootstrap';
+import React, { Component } from 'react';
+import {Tabs, Tab, Button, Form, ButtonGroup, Card, OverlayTrigger, Popover} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
 import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
@@ -175,7 +175,7 @@ export class GeneratorView extends Component {
         }
         
         if (option.input == 'desc'){
-            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.label}</Form.Label></Form.Group>;
+            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Text className="text-muted">{option.label}</Form.Text></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -344,30 +344,23 @@ export class HelpButton extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {show: false};
-        this.target = React.createRef();
     }
 
-
     render(){
-        return <>
-            <a ref={this.target} href="#" onClick={() => this.setState({show: !this.state.show})}>
-                <FontAwesomeIcon icon={faQuestionCircle}/>
-            </a>
-                <div
-                    style={{
-                    position: 'absolute',
-                    backgroundColor: 'rgba(255, 255, 255, 0.85)',
-                    padding: '2px 10px',
-                    color: 'black',
-                    border: '1px solid black',
-                    borderRadius: 3,
-                    display: this.state.show ? 'block' : 'none'
-                    }}
-                >
-                    {this.props.helpText}
-                </div>
-            </>;
+        const popover = (
+            <Popover id="popover-help">
+              <Popover.Content>
+                {this.props.helpText}
+              </Popover.Content>
+            </Popover>
+          );
 
+         
+        let main =
+            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                 <Button variant="link" className='p-0'><FontAwesomeIcon icon={faQuestionCircle}/></Button>
+            </OverlayTrigger>;
+
+        return main;
     }
 }

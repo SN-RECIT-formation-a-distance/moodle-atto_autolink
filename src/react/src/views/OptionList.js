@@ -117,6 +117,8 @@ export const Options = [
                 input: 'checkbox',
                 label: M.util.get_string('button', 'atto_recitautolink'),
                 helpButton: <>
+                <span>{M.util.get_string('infobs', 'atto_recitautolink')}</span>
+                <br/>
                 <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')}</a><br/>
                 <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')}</a>
                 </>,
@@ -207,6 +209,8 @@ export const Options = [
                 input: 'checkbox',
                 label: M.util.get_string('button', 'atto_recitautolink'),
                 helpButton: <>
+                <span>{M.util.get_string('infobs', 'atto_recitautolink')}</span>
+                <br/>
                 <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')}</a><br/>
                 <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')}</a>
                 </>,
