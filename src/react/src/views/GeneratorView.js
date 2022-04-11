@@ -357,7 +357,7 @@ export class HelpButton extends Component {
 
          
         let main =
-            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
                  <Button variant="link" className='p-0'><FontAwesomeIcon icon={faQuestionCircle}/></Button>
             </OverlayTrigger>;
 
