@@ -39,7 +39,7 @@ function xmldb_atto_recitautolink_install() {
         foreach ($groups as $i => $group) {
             $parts = explode('=', $group);
             if (trim($parts[0]) == 'recit') {
-                $groups[$i] = "recit = ' . trim($parts[1]) . ', $pluginname";
+                $groups[$i] = "recit = " . trim($parts[1]) . ", $pluginname";
                 $found = true;
             }
         }
