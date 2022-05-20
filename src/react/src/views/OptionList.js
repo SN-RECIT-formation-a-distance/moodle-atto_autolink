@@ -85,6 +85,17 @@ export const Options = [
                 }
             },
             {
+                name: 'opening',
+                input: 'radio',
+                label: M.util.get_string('modal16x9', 'atto_recitautolink'),
+                key: 'modal',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/p16x9";
+                    }
+                }
+            },
+            {
                 input: 'separator',
             },
             {

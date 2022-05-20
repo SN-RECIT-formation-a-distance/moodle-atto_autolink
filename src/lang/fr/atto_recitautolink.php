@@ -16,6 +16,7 @@ $string['h5p'] = 'H5P';
 $string['sametab'] = 'Même onglet';
 $string['newtab'] = 'Nouvel onglet';
 $string['modal'] = 'Modal';
+$string['modal16x9'] = 'Modal optimisé pour les activités contenant des Iframe';
 $string['icon'] = 'Icône';
 $string['button'] = 'Bouton';
 $string['section'] = 'Section';
