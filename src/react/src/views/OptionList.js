@@ -32,6 +32,9 @@ export const Options = [
                 input: 'select',
                 name: M.util.get_string('activity', 'atto_recitautolink'),
                 key: 'activity',
+                infoButton: <>
+                <span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>
+                </>,
                 dataProvider: 'cmList',
                 required: true,
                 getOption: function(input){
@@ -160,6 +163,9 @@ export const Options = [
                 input: 'select',
                 name: M.util.get_string('section', 'atto_recitautolink'),
                 key: 'section',
+                infoButton: <>
+                <span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>
+                </>,
                 dataProvider: 'sectionList',
                 required: true,
                 getOption: function(input){
@@ -252,6 +258,9 @@ export const Options = [
                 input: 'select',
                 name: M.util.get_string('h5p', 'atto_recitautolink'),
                 key: 'h5p',
+                infoButton: <>
+                <span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>
+                </>,
                 dataProvider: 'h5pList',
                 required: true,
                 getOption: function(input){

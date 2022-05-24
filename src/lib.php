@@ -54,6 +54,7 @@ function atto_recitautolink_strings_for_js() {
                                             'icon',
                                             'modal',
                                             'modal16x9',
+                                            'resourceaccess',
                                             'sametab',
                                             'newtab',
                                             'h5p',

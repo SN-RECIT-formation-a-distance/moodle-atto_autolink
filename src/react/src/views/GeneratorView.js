@@ -25,7 +25,7 @@ import {Tabs, Tab, Button, Form, ButtonGroup, Card, OverlayTrigger, Popover} fro
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
 import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -163,19 +163,19 @@ export class GeneratorView extends Component {
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
         if (option.input == 'checkbox'){
-            return <Form.Group key={key}><Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
+            return <Form.Group key={key}><Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
         }
         
         if (option.input == 'radio'){
-            return <Form.Check  key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
+            return <Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
         }
         
         if (option.input == 'text'){
-            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
         if (option.input == 'desc'){
-            return <Form.Group  key={key} className="mb-3" controlId={"item"+id}><Form.Text className="text-muted">{option.label}</Form.Text></Form.Group>;
+            return <Form.Group key={key} className="mb-3" controlId={"item"+id}><Form.Text className="text-muted">{option.label}</Form.Text></Form.Group>;
         }
         
         if (option.input == 'select'){
@@ -183,12 +183,11 @@ export class GeneratorView extends Component {
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
             }
-            return <Form.Group  key={key} className="mb-3"  controlId={"item"+id}><Form.Label>{option.name}</Form.Label><ComboBoxPlus options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+            return <Form.Group key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name} {option.infoButton && <HelpButton icon={faInfoCircle} helpText={option.infoButton}/>}</Form.Label><ComboBoxPlus options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
         }
         
-        
         if (option.input == 'separator'){
-            return <Form.Group  key={key}><hr/></Form.Group>;
+            return <Form.Group key={key}><hr/></Form.Group>;
         }
     }
 
@@ -300,7 +299,9 @@ export class GeneratorView extends Component {
             }
 
             let list = [];
+            let modnameToExclude = ['label']; //Exclude label because it's not an activity
             for (let e of result[0].data){
+                if (modnameToExclude.includes(e.modname)) continue;
                 list.push({value: e.name, label: e.name + " [" + e.modname + "]"});
             }
             that.setState({cmList: list});
@@ -339,7 +340,8 @@ export class GeneratorView extends Component {
 
 export class HelpButton extends Component {
     static defaultProps = {
-        helpText: ''
+        helpText: '',
+        icon: faQuestionCircle
     }
 
     constructor(props) {
@@ -358,7 +360,7 @@ export class HelpButton extends Component {
          
         let main =
             <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
-                 <Button variant="link" className='p-0'><FontAwesomeIcon icon={faQuestionCircle}/></Button>
+                 <Button variant="link" className='p-0'><FontAwesomeIcon icon={this.props.icon}/></Button>
             </OverlayTrigger>;
 
         return main;

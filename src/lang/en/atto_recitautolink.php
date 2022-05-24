@@ -17,6 +17,7 @@ $string['sametab'] = 'Same tab';
 $string['newtab'] = 'New tab';
 $string['modal'] = 'Modal';
 $string['modal16x9'] = 'Modal optimised for activities with Iframe';
+$string['resourceaccess'] = 'Only resources you have access will be listed';
 $string['icon'] = 'Icon';
 $string['button'] = 'Button';
 $string['section'] = 'Section';

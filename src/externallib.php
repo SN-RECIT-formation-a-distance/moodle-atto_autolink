@@ -54,7 +54,9 @@ class atto_recitautolink_external extends external_api {
         $modinfo = get_fast_modinfo($params['courseid']);
 
         foreach ($modinfo->cms as $cm){
-            $result[] = array('id' => $cm->id, 'name' => $cm->name, 'modname' => $cm->modname);
+            if ($cm->uservisible) {
+                $result[] = array('id' => $cm->id, 'name' => $cm->name, 'modname' => $cm->modname);
+            }
         }
         return $result;
     }
@@ -83,7 +85,9 @@ class atto_recitautolink_external extends external_api {
         $modinfo = get_fast_modinfo($params['courseid']);
 
         foreach ($modinfo->get_section_info_all() as $section){
-            $result[] = array('id' => $section->section, 'name' => (empty($section->name) ? get_string('section') . '' . $section->section : $section->name));
+            if ($section->uservisible) {
+                $result[] = array('id' => $section->section, 'name' => (empty($section->name) ? get_string('section') . '' . $section->section : $section->name));
+            }
         }
         return $result;
     }
@@ -113,6 +117,10 @@ class atto_recitautolink_external extends external_api {
         $coursecontext = \context_course::instance($params['courseid']);
 
         $PAGE->set_context($coursecontext);
+
+        if (!has_capability('moodle/contentbank:access', $coursecontext)) {
+            return $result;
+        }
 
         $contentbank = new \core_contentbank\contentbank();
         $contents = $contentbank->search_contents('', $coursecontext->id);

@@ -1,6 +1,6 @@
 <?php
 $string['pluginname'] = 'Autolink';
-$string['privacy:metadata'] = 'Ce plugin ne stocke pas de données personnelles.';
+$string['privacy:metadata'] = 'Ce plugin ne conserve pas de données personnelles.';
 
 $string['coursename'] = 'Nom complet du cours';
 $string['shortcoursename'] = 'Nom court du cours';
@@ -16,7 +16,8 @@ $string['h5p'] = 'H5P';
 $string['sametab'] = 'Même onglet';
 $string['newtab'] = 'Nouvel onglet';
 $string['modal'] = 'Modal';
-$string['modal16x9'] = 'Modal optimisé pour les activités contenant des Iframe';
+$string['modal16x9'] = 'Modal optimisé pour les activités en format 16 : 9';
+$string['resourceaccess'] = 'Seules les ressources dont vous avez accès seront affichées';
 $string['icon'] = 'Icône';
 $string['button'] = 'Bouton';
 $string['section'] = 'Section';
