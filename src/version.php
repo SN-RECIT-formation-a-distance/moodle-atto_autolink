@@ -24,12 +24,12 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2022052600;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2022100100;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2020061500.00; // Moodle 3.9.0
 $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
-$plugin->release = 'v1.16.0'; 
-// This is a list of plugins, this plugin depends on (and their versions).                                                          
+$plugin->release = 'v1.16.1-stable'; // This is a list of plugins, this plugin depends on (and their versions).
+$plugin->supported = [39, 311];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.                               
 $plugin->dependencies = [
-	'filter_recitactivity' => 2022052600
+	'filter_recitactivity' => 2022100100
 ];
-$plugin->maturity = MATURITY_BETA; // MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC or MATURITY_STABLE
+$plugin->maturity = MATURITY_STABLE; // MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC or MATURITY_STABLE
