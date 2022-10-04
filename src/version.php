@@ -28,7 +28,7 @@ $plugin->version   = 2022100100;        // The current plugin version (Date: YYY
 $plugin->requires  = 2020061500.00; // Moodle 3.9.0
 $plugin->component = 'atto_recitautolink';  // Full name of the plugin (used for diagnostics).
 $plugin->release = 'v1.16.0-stable'; // This is a list of plugins, this plugin depends on (and their versions). 
-$plugin->supported = [39, 311];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.  
+$plugin->supported = [39, 400];      //  Moodle 3.9.x, 3.10.x and 3.11.x are supported.  
 $plugin->dependencies = [
 	'filter_recitactivity' => 2022100100
 ];
