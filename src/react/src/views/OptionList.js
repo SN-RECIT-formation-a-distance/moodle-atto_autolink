@@ -279,7 +279,7 @@ export const Options = [
         options: [
             {
                 name: 'infocourse',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('coursename', 'atto_recitautolink'),
                 key: 'info1',
                 getOption: function(input){
@@ -290,7 +290,7 @@ export const Options = [
             },
             {
                 name: 'infocourse',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('shortcoursename', 'atto_recitautolink'),
                 key: 'info2',
                 getOption: function(input){
@@ -306,7 +306,7 @@ export const Options = [
 
             {
                 name: 'infostudent',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('studentfirstname', 'atto_recitautolink'),
                 key: 'info3',
                 getOption: function(input){
@@ -317,7 +317,7 @@ export const Options = [
             },
             {
                 name: 'infostudent',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('studentlastname', 'atto_recitautolink'),
                 key: 'info4',
                 getOption: function(input){
@@ -328,9 +328,9 @@ export const Options = [
             },
             {
                 name: 'infostudent',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('studentemail', 'atto_recitautolink'),
-                key: 'info5',
+                key: 'radio',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/user.email";
@@ -339,7 +339,7 @@ export const Options = [
             },
             {
                 name: 'infostudent',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('studentavatar', 'atto_recitautolink'),
                 key: 'info6',
                 getOption: function(input){
@@ -355,7 +355,7 @@ export const Options = [
 
             {
                 name: 'infoteacher1',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #1',
                 key: 'info7',
                 getOption: function(input){
@@ -366,7 +366,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher1',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #1',
                 key: 'info8',
                 getOption: function(input){
@@ -377,7 +377,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher1',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #1',
                 key: 'info9',
                 getOption: function(input){
@@ -388,7 +388,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher1',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #1',
                 key: 'info18',
                 getOption: function(input){
@@ -404,7 +404,7 @@ export const Options = [
 
             {
                 name: 'infoteacher2',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #2',
                 key: 'info10',
                 getOption: function(input){
@@ -415,7 +415,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher2',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #2',
                 key: 'info11',
                 getOption: function(input){
@@ -426,7 +426,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher2',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #2',
                 key: 'info12',
                 getOption: function(input){
@@ -437,7 +437,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher2',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #2',
                 key: 'info17',
                 getOption: function(input){
@@ -453,7 +453,7 @@ export const Options = [
 
             {
                 name: 'infoteacher3',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #3',
                 key: 'info13',
                 getOption: function(input){
@@ -464,7 +464,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher3',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #3',
                 key: 'info14',
                 getOption: function(input){
@@ -475,7 +475,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher3',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #3',
                 key: 'info15',
                 getOption: function(input){
@@ -486,7 +486,7 @@ export const Options = [
             },
             {
                 name: 'infoteacher3',
-                input: 'checkbox',
+                input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #3',
                 key: 'info16',
                 getOption: function(input){

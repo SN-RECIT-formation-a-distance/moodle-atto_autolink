@@ -10,3 +10,4 @@ react_app/build/index.js
 react_app/build/index.js.map 
 atto_recitautolink.zip
 src/react/package-lock.json
+*.zip
