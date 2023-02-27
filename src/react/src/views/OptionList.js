@@ -277,32 +277,7 @@ export const Options = [
         key: 'info',
         singleInput: true,
         options: [
-            {
-                name: 'infocourse',
-                input: 'radio',
-                label: M.util.get_string('coursename', 'atto_recitautolink'),
-                key: 'info1',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/d/course.fullname";
-                    }
-                }
-            },
-            {
-                name: 'infocourse',
-                input: 'radio',
-                label: M.util.get_string('shortcoursename', 'atto_recitautolink'),
-                key: 'info2',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/d/course.shortname";
-                    }
-                }
-            },
 
-            {
-                input: 'separator',
-            },
 
             {
                 name: 'infostudent',
@@ -351,6 +326,37 @@ export const Options = [
 
             {
                 input: 'separator',
+            },
+            {
+                name: 'infocourse',
+                input: 'radio',
+                label: M.util.get_string('coursename', 'atto_recitautolink'),
+                key: 'info1',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/course.fullname";
+                    }
+                }
+            },
+            {
+                name: 'infocourse',
+                input: 'radio',
+                label: M.util.get_string('shortcoursename', 'atto_recitautolink'),
+                key: 'info2',
+                getOption: function(input){
+                    if (input.checked){
+                        return "/d/course.shortname";
+                    }
+                }
+            },
+            {
+                input: 'separator',
+            },
+            {
+                input: 'help',
+                helpButton: <>
+                <span>{M.util.get_string('infoteachernum', 'atto_recitautolink')}</span>
+                </>,
             },
 
             {

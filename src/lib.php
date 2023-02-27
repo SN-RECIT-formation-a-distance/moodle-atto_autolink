@@ -37,6 +37,7 @@ function atto_recitautolink_strings_for_js() {
                                             'insert',
                                             'cancel',
                                             'csspreview',
+                                            'infoteachernum',
                                             'getstarted',
                                             'linktext',
                                             'invalidcode',

@@ -164,12 +164,16 @@ export class GeneratorView extends Component {
     getInput(option, key){
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
+        if (option.input == 'help'){
+            return <Form.Group key={key}>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
+        }
+
         if (option.input == 'checkbox'){
             return <Form.Group key={key}><Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
         }
         
         if (option.input == 'radio'){
-            return <Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>;
+            return <><Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/><br/></>;
         }
         
         if (option.input == 'text'){
