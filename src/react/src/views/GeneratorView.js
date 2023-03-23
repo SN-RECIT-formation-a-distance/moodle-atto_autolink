@@ -77,6 +77,9 @@ export class GeneratorView extends Component {
         let data = this.state.data;
         let btn = ' btn btn-'+css+' ';
         let name = 'css';
+        if (!values[name]){
+            values[name] = '';
+        }
         if (values[name].includes('btn')){
             values[name] = values[name].replace(btn, '');
         }else{
@@ -143,8 +146,7 @@ export class GeneratorView extends Component {
         
         if((option.required) || (['infocourse', 'infostudent', 'infoteacher1', 'infoteacher2', 'infoteacher3', 'testcase'].includes(option.name))){
             validated = true;
-            values = {};
-            data = {};
+            this.resetValues();
         }
       
         if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
@@ -169,7 +171,7 @@ export class GeneratorView extends Component {
         }
 
         if (option.input == 'checkbox'){
-            return <Form.Group key={key}><Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
+            return <Form.Group key={key}><Form.Check className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
         }
         
         if (option.input == 'radio'){
