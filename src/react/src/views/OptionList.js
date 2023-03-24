@@ -277,13 +277,11 @@ export const Options = [
         key: 'info',
         singleInput: true,
         options: [
-
-
             {
-                name: 'infostudent',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('studentfirstname', 'atto_recitautolink'),
-                key: 'info3',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/user.firstname";
@@ -291,10 +289,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infostudent',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('studentlastname', 'atto_recitautolink'),
-                key: 'info4',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/user.lastname";
@@ -302,10 +300,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infostudent',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('studentemail', 'atto_recitautolink'),
-                key: 'radio',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/user.email";
@@ -313,10 +311,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infostudent',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('studentavatar', 'atto_recitautolink'),
-                key: 'info6',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/user.picture";
@@ -328,10 +326,10 @@ export const Options = [
                 input: 'separator',
             },
             {
-                name: 'infocourse',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('coursename', 'atto_recitautolink'),
-                key: 'info1',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/course.fullname";
@@ -339,10 +337,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infocourse',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('shortcoursename', 'atto_recitautolink'),
-                key: 'info2',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/course.shortname";
@@ -353,17 +351,13 @@ export const Options = [
                 input: 'separator',
             },
             {
-                input: 'help',
+                name: 'information',
+                input: 'radio',
                 helpButton: <>
                 <span>{M.util.get_string('infoteachernum', 'atto_recitautolink')}</span>
                 </>,
-            },
-
-            {
-                name: 'infoteacher1',
-                input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #1',
-                key: 'info7',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher1.firstname";
@@ -371,10 +365,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher1',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #1',
-                key: 'info8',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher1.lastname";
@@ -382,10 +376,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher1',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #1',
-                key: 'info9',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher1.email";
@@ -393,10 +387,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher1',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #1',
-                key: 'info18',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher1.picture";
@@ -409,10 +403,10 @@ export const Options = [
             },
 
             {
-                name: 'infoteacher2',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #2',
-                key: 'info10',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher2.firstname";
@@ -420,10 +414,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher2',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #2',
-                key: 'info11',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher2.lastname";
@@ -431,10 +425,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher2',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #2',
-                key: 'info12',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher2.email";
@@ -442,10 +436,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher2',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #2',
-                key: 'info17',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher2.picture";
@@ -458,10 +452,10 @@ export const Options = [
             },
 
             {
-                name: 'infoteacher3',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacherfirstname', 'atto_recitautolink')+' #3',
-                key: 'info13',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher3.firstname";
@@ -469,10 +463,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher3',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacherlastname', 'atto_recitautolink')+' #3',
-                key: 'info14',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher3.lastname";
@@ -480,10 +474,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher3',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheremail', 'atto_recitautolink')+' #3',
-                key: 'info15',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher3.email";
@@ -491,10 +485,10 @@ export const Options = [
                 }
             },
             {
-                name: 'infoteacher3',
+                name: 'information',
                 input: 'radio',
                 label: M.util.get_string('teacheravatar', 'atto_recitautolink')+' #3',
-                key: 'info16',
+                key: 'information',
                 getOption: function(input){
                     if (input.checked){
                         return "/d/teacher3.picture";

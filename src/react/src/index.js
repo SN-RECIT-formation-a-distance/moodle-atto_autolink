@@ -24,6 +24,7 @@ import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import {GeneratorView} from "./views/Views";
 import {$glVars} from "./common/common";
+import { Options } from './common/Options';
  
 class App extends Component {
     static defaultProps = {
@@ -54,4 +55,5 @@ window.openRecitAutolinkUI = function(classHandler){
     const domContainer = document.getElementById('recitautolink_container');
     const root = createRoot(domContainer);
     root.render(<App classHandler={classHandler}/>);
+    console.log(Options.appVersion());
 };

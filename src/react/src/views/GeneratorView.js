@@ -144,7 +144,7 @@ export class GeneratorView extends Component {
 
         let opt = option.getOption(e.target, this);
         
-        if((option.required) || (['infocourse', 'infostudent', 'infoteacher1', 'infoteacher2', 'infoteacher3', 'testcase'].includes(option.name))){
+        if((option.required) || (['information', 'testcase'].includes(option.name))){
             validated = true;
             this.resetValues();
         }
@@ -166,16 +166,12 @@ export class GeneratorView extends Component {
     getInput(option, key){
         let id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); //Generate a random id for form id
 
-        if (option.input == 'help'){
-            return <Form.Group key={key}>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
-        }
-
         if (option.input == 'checkbox'){
-            return <Form.Group key={key}><Form.Check className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</Form.Group>;
+            return <div key={key} className="d-flex align-items-center"><Form.Check className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</div>;
         }
         
         if (option.input == 'radio'){
-            return <><Form.Check key={key} className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/><br/></>;
+            return <div key={key} className="d-flex align-items-center"><Form.Check  className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</div>;
         }
         
         if (option.input == 'text'){
