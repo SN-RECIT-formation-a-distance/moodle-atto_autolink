@@ -58,7 +58,7 @@ export const Options = [
                 input: 'radio',
                 default: true,
                 label: M.util.get_string('sametab', 'atto_recitautolink'),
-                key: 'oldtab',
+                key: 'opening',
                 getOption: function(input){
                     if (input.checked){
                         return "";
@@ -69,7 +69,7 @@ export const Options = [
                 name: 'opening',
                 input: 'radio',
                 label: M.util.get_string('newtab', 'atto_recitautolink'),
-                key: 'newtab',
+                key: 'opening',
                 getOption: function(input){
                     if (input.checked){
                         return "/b";
@@ -80,7 +80,7 @@ export const Options = [
                 name: 'opening',
                 input: 'radio',
                 label: M.util.get_string('modal', 'atto_recitautolink'),
-                key: 'modal',
+                key: 'opening',
                 getOption: function(input){
                     if (input.checked){
                         return "/p";
@@ -91,7 +91,7 @@ export const Options = [
                 name: 'opening',
                 input: 'radio',
                 label: M.util.get_string('modal16x9', 'atto_recitautolink'),
-                key: 'modal',
+                key: 'opening',
                 getOption: function(input){
                     if (input.checked){
                         return "/p16x9";
