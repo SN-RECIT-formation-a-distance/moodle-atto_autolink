@@ -22,7 +22,7 @@
  */
 import packageJson from "../../package.json";
 
-export class Options
+export class AppOptions
 {
     static appVersion(){ return packageJson.version; }
 

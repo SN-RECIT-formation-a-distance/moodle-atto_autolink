@@ -27,6 +27,8 @@ export const Options = [
     {
         name: M.util.get_string('activities', 'atto_recitautolink'),
         key: 'activity',
+        cssClasses: true, 
+        tagName: 'a',
         options: [
             {
                 input: 'select',
@@ -47,6 +49,7 @@ export const Options = [
                 input: 'text',
                 name: M.util.get_string('linktext', 'atto_recitautolink'),
                 key: 'linktext',
+                placeholderKey: 'activity',
                 getOption: function(input){
                     if (input.value.length > 0){
                         return "/desc:\""+ input.value+"\"";
@@ -127,7 +130,7 @@ export const Options = [
                 input: 'separator',
             },
             {
-                name: 'otheroptions',
+                name: 'checkboxbtn',
                 input: 'checkbox',
                 label: M.util.get_string('button', 'atto_recitautolink'),
                 helpButton: <>
@@ -136,9 +139,13 @@ export const Options = [
                 <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a><br/>
                 <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a>
                 </>,
-                key: 'btn',
+                key: 'activitybtn',
+                assignTo: 'activitycss',
                 getOption: function(input){
                     if (input.checked){
+                        return "btn btn-primary";
+                    }
+                    else{
                         return "";
                     }
                 }
@@ -146,7 +153,7 @@ export const Options = [
             {
                 input: 'text',
                 name: M.util.get_string('cssclass', 'atto_recitautolink'),
-                key: 'css',
+                key: 'activitycss',
                 getOption: function(input){
                     if (input.value.length > 0){
                         return "/class:\""+ input.value+"\"";
@@ -158,6 +165,8 @@ export const Options = [
     {
         name: M.util.get_string('sections', 'atto_recitautolink'),
         key: 'section',
+        cssClasses: true,
+        tagName: 'a',
         options: [
             {
                 input: 'select',
@@ -178,51 +187,18 @@ export const Options = [
                 input: 'text',
                 name: M.util.get_string('linktext', 'atto_recitautolink'),
                 key: 'linktext',
+                placeholderKey: 'section',
                 getOption: function(input){
                     if (input.value.length > 0){
                         return "/desc:\""+ input.value+"\"";
                     }
                 }
             },
-            /*{
-                name: 'opening',
-                input: 'radio',
-                default: true,
-                label: 'Même onglet',
-                key: 'oldtab',
-                getOption: function(input){
-                    if (input.checked){
-                        return "";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                label: 'Nouvel onglet',
-                key: 'newtab',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/b";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                label: 'Modal',
-                key: 'modal',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/p";
-                    }
-                }
-            },*/
             {
                 input: 'separator',
             },
             {
-                name: 'otheroptions',
+                name: 'checkboxbtn2',
                 input: 'checkbox',
                 label: M.util.get_string('button', 'atto_recitautolink'),
                 helpButton: <>
@@ -231,17 +207,21 @@ export const Options = [
                 <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a><br/>
                 <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a>
                 </>,
-                key: 'btn',
-                getOption: function(input){
-                    if (input.checked){
-                        return "";
-                    }
-                }
+                 key: 'sectionbtn',
+                 assignTo: 'sectioncss',
+                 getOption: function(input){
+                     if (input.checked){
+                         return "btn btn-primary";
+                     }
+                     else{
+                         return "";
+                     }
+                 }
             },
             {
                 input: 'text',
                 name: M.util.get_string('cssclass', 'atto_recitautolink'),
-                key: 'css',
+                key: 'sectioncss',
                 getOption: function(input){
                     if (input.value.length > 0){
                         return "/class:\""+ input.value+"\"";
@@ -495,6 +475,62 @@ export const Options = [
                     }
                 }
             },
+        ]
+    },
+    {
+        name: M.util.get_string('injection', 'atto_recitautolink'),
+        key: 'injectionactivity',
+        cssClasses: true,
+        tagName: 'div',
+        options: [
+            {
+                input: 'select',
+                name: M.util.get_string('activity', 'atto_recitautolink'),
+                key: 'injectionactivity',
+                infoButton: <>
+                <span>{M.util.get_string('injectionresources', 'atto_recitautolink')}</span>
+                </>,
+                dataProvider: 'cmList',
+                required: true,
+                filter: function(item){
+                    return (item.label.search(/\[page\]/g) >= 0)
+                },
+                getOption: function(input){
+                    if (input.value.length > 0){
+                        return "/f/" + input.value;
+                    }
+                }
+            },
+            {
+                name: 'checkboxbtn3',
+                input: 'checkbox',
+                label: M.util.get_string('border', 'atto_recitautolink'),
+                helpButton: <>
+                <span>{M.util.get_string('infobs', 'atto_recitautolink')}</span>
+                <br/>
+                <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a><br/>
+                </>,
+                key: 'injectionactivityborder',
+                assignTo: 'injectionactivitycss',
+                getOption: function(input){
+                    if (input.checked){
+                        return "border rounded p-2";
+                    }
+                    else{
+                        return "";
+                    }
+                }
+            },
+            {
+                input: 'text',
+                name: M.util.get_string('cssclass', 'atto_recitautolink'),
+                key: 'injectionactivitycss',
+                getOption: function(input){
+                    if (input.value.length > 0){
+                        return "/class:\""+ input.value+"\"";
+                    }
+                }
+            }
         ]
     },
     {

@@ -24,6 +24,7 @@ import React, { Component } from 'react';
 import {Tabs, Tab, Button, Form, ButtonGroup, Card, OverlayTrigger, Popover} from 'react-bootstrap';
 import { Options } from './OptionList';
 import {$glVars} from '../common/common';
+import {AppOptions} from '../common/Options';
 import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
 import { faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,61 +36,64 @@ export class GeneratorView extends Component {
         this.state = {cmList: [], sectionList: [], h5pList: [], activeTab: 'activity', data: [], values: {}, validated: false, initialized: false};
         this.setTab = this.setTab.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.generateCSSButton = this.generateCSSButton.bind(this);
         this.generateCode = this.generateCode.bind(this);
         this.generateTestCode = this.generateTestCode.bind(this);
     }
 
     render() {       
         if (!this.state.initialized) return null;
+
         let main = 
         <Card style={{height: 500}}> 
-            <Card.Body style={{overflowY: "auto"}} >
+            <Card.Body style={{overflowY: "auto"}} > 
                 <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
                     {Options.map((item, index) => (
                         <Tab title={item.name} eventKey={item.key} key={index}>
                             {item.options.map((input, i) => {
                                 return this.getInput(input, i);
                             })}
-                            {(item.key == 'activity' || item.key == 'section') &&
-                            <>
-                                <hr/>
-                                <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}><Form.Label>{M.util.get_string('csspreview', 'atto_recitautolink')}</Form.Label><br/><a href="#" className={this.state.values['css']}>{this.state.values['linktext']}</a></Form.Group>                    
-                            </>}                        
+                            {this.displayCssPreview(item, index)}                    
                         </Tab>
                     ))}
                 </Tabs>
             </Card.Body>
-            <Card.Footer className="d-flex justify-content-between">
+            <Card.Footer className="d-flex justify-content-between align-items-center">  
+                <div className='small'>{AppOptions.appVersion()}</div>              
                 <ButtonGroup>
                     <Button variant="secondary" onClick={() => this.props.onClose()}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                     <Button onClick={this.generateCode}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
                 </ButtonGroup>
             </Card.Footer>
+            
         </Card>;
         
 
         return (main);
     }
 
-    generateCSSButton(css){
-        let values = this.state.values;
-        let data = this.state.data;
-        let btn = ' btn btn-'+css+' ';
-        let name = 'css';
-        if (!values[name]){
-            values[name] = '';
+    displayCssPreview(item, index){
+        if(!item.hasOwnProperty('cssClasses')){ return null;} 
+        if(!item.cssClasses) {return null;}
+        
+        let text = this.state.values['linktext'];
+        
+        if((text.length === 0) && (this.state.data[item.key])){
+            text = this.state.data[item.key].opt.split("/").pop(); // remove '/' character
         }
-        if (values[name].includes('btn')){
-            values[name] = values[name].replace(btn, '');
-        }else{
-            values[name] += btn;
-        }
-        let option = this.getOption(name);
-        let opt = option.getOption({value:values[name]});
-        data[name] = {opt: opt, required: option.required};
 
-        this.setState({data: data, values: values});
+        let el = React.createElement(item.tagName, {className: this.state.values[`${item.key}css`]}, text);
+
+        let result =
+        <>
+            <hr/>
+            <Form.Group className="mb-3" key={"css"+index} controlId={"css"+index}>
+                <Form.Label>{M.util.get_string('csspreview', 'atto_recitautolink')}</Form.Label>
+                <br/> 
+                {el}
+            </Form.Group>                    
+        </>
+        
+        return result;
     }
 
     getTab(k){
@@ -108,11 +112,13 @@ export class GeneratorView extends Component {
     getOption(key){
         for (let i in Options){
             for (let v of Options[i].options){
-                if (v.key == key){
+                if (v.hasOwnProperty('key') && v.key === key){
                     return v;
                 }
             }
         }
+
+        return null;
     }
 
     resetValues(group){
@@ -148,19 +154,19 @@ export class GeneratorView extends Component {
             validated = true;
             this.resetValues();
         }
-      
+
         if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
             values[name] = e.target.checked;
+
+            if(option.hasOwnProperty('assignTo')){
+                values[option.assignTo] = opt;
+            }
         }else{
             values[name] = e.target.value;
         }
-        
+        console.log(values[name])
         data[name] = {opt: opt, required: option.required};
         this.setState({data: data, values: values, validated: validated});
-
-        if (name == 'btn'){
-            this.generateCSSButton('primary');
-        }
     }
 
     getInput(option, key){
@@ -169,13 +175,17 @@ export class GeneratorView extends Component {
         if (option.input == 'checkbox'){
             return <div key={key} className="d-flex align-items-center"><Form.Check className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} checked={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</div>;
         }
-        
+         
         if (option.input == 'radio'){
             return <div key={key} className="d-flex align-items-center"><Form.Check  className="m-1" id={option.name+option.key+id} inline type={option.input} label={option.label} name={option.name} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>{option.helpButton && <HelpButton helpText={option.helpButton}/>}</div>;
         }
         
-        if (option.input == 'text'){
-            return <Form.Group key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name}</Form.Label><Form.Control type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+        if (option.input == 'text'){  
+            let placeholder = (option.hasOwnProperty('placeholderKey') ? this.state.values[option.placeholderKey] : '');
+            return <Form.Group key={key} className="mb-3" controlId={"item"+id}>
+                        <Form.Label>{option.name}</Form.Label>
+                        <Form.Control placeholder={placeholder} type="text" name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>
+                    </Form.Group>;
         }
         
         if (option.input == 'desc'){
@@ -186,8 +196,16 @@ export class GeneratorView extends Component {
             let dataProvider = [];
             if (this.state[option.dataProvider]){
                 dataProvider = this.state[option.dataProvider];
+
+                if(option.hasOwnProperty('filter')){
+                    dataProvider = dataProvider.filter(option.filter);
+                }
             }
-            return <Form.Group key={key} className="mb-3" controlId={"item"+id}><Form.Label>{option.name} {option.infoButton && <HelpButton icon={faInfoCircle} helpText={option.infoButton}/>}</Form.Label><ComboBoxPlus options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/></Form.Group>;
+
+            return <Form.Group key={key} className="mb-3" controlId={"item"+id}>
+                    <Form.Label>{option.name} {option.infoButton && <HelpButton icon={faInfoCircle} helpText={option.infoButton}/>}</Form.Label>
+                    <ComboBoxPlus options={dataProvider} name={option.key} data-key={option.key} onChange={(e) => this.onChange(e, option)} value={this.state.values[option.key]}/>
+                </Form.Group>;
         }
         
         if (option.input == 'separator'){
@@ -214,7 +232,7 @@ export class GeneratorView extends Component {
                 code += data[i].opt;
             }
         }
-        code = "[[" + code.substr(1) + "]]"; //Remove first slash
+        code = "[[" + code.substring(1) + "]]"; //Remove first slash
         if (save){
             this.props.onClose(code);
         }

@@ -34,10 +34,13 @@ $string['generatetestcode'] = 'Générer cas de test';
 $string['insert'] = 'Insérer';
 $string['btnshape'] = 'Modifier la forme';
 $string['btnlook'] = 'Modifier l\'apparence';
-$string['infobs'] = 'Les classes Bootstrap peuvent être modifiées. Les classes modifient l\'apparence du bouton.';
+$string['infobs'] = 'Les classes Bootstrap peuvent être modifiées. Les classes modifient l\'apparence de l\'élément.';
 $string['csspreview'] = 'Aperçu du CSS';
 $string['cancel'] = 'Annuler';
 $string['activity'] = 'Activité';
 $string['activities'] = 'Activités';
 $string['infoteachernum'] = "L'enseignant #1 correspond au premier prénom trouvé par ordre alphabétique. Si l'élève est associé à un groupe, la correspondance avec l'enseignant est filtrée en fonction du groupe.";
+$string['injection'] = 'Injection';
+$string['injectionresources'] = 'Seules les ressources de type page dont vous avez accès seront affichées';
+$string['border'] = 'Bordure';
 ?>

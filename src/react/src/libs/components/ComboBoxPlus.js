@@ -43,18 +43,26 @@ export class ComboBoxPlus extends Component {
         super(props);
         
         this.onChange = this.onChange.bind(this);
-        this.state = {value: this.props.value};
+        
     }
     
     render() {     
+        let options = this.props.options;
+
+        let val = null;
+        for (let o of options){
+            if (o.value.toString() === this.props.value.toString()){
+                val = o;
+            }
+        }
         //  spread attributes <div {...this.props}>    
-        let spreadAttr = {required: this.props.required, disabled: this.props.disabled, size: this.props.size, style: this.props.style, options: this.props.options};
+        let spreadAttr = {required: this.props.required, isDisabled: this.props.disabled, size: this.props.size, style: this.props.style, options: options};
         if (this.props.multiple){
             spreadAttr.isMulti = true;
         }
 
         let main = 
-            <Select {...spreadAttr} onChange={this.onChange} defaultValue={this.props.value} placeholder={this.props.placeholder}>
+            <Select {...spreadAttr} onChange={this.onChange} value={val} placeholder={this.props.placeholder}>
             </Select>;            
         return (main);
     }   
@@ -63,7 +71,10 @@ export class ComboBoxPlus extends Component {
         let value = event.value || "";
         let text = event.label;
         this.setState({value:value});
+        if (this.props.multiple){
+            value = event;
+        }
 
-        this.props.onChange({target:{name: this.props.name, value: value, text: text, data: this.props.data}});
+        this.props.onChange({target:{name: this.props.name, value: value, text: text, data: event.data}});
     }   
 }

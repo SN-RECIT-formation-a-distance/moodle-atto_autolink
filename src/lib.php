@@ -69,6 +69,9 @@ function atto_recitautolink_strings_for_js() {
                                             'teacherlastname',
                                             'teacheremail',
                                             'teacheravatar',
+                                            'injection',
+                                            'injectionresources',
+                                            'border'
                                         ),
                                     'atto_recitautolink');
 }

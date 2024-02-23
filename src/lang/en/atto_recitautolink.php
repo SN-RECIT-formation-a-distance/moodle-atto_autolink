@@ -34,10 +34,13 @@ $string['generatetestcode'] = 'Generate test code';
 $string['insert'] = 'Insert';
 $string['btnshape'] = 'Change shape';
 $string['btnlook'] = 'Change look';
-$string['infobs'] = 'Bootstrap classes can be modified. Classes change the appearance of the button.';
+$string['infobs'] = 'Bootstrap classes can be modified. Classes change the appearance of the element.';
 $string['csspreview'] = 'CSS preview';
 $string['cancel'] = 'Cancel';
 $string['activity'] = 'Activity';
 $string['infoteachernum'] = 'Teacher #1 corresponds to the first given name found in alphabetical order. If the student is associated with a group, the correspondence with the teacher is filtered according to the group';
 $string['activities'] = 'Activities';
+$string['injection'] = 'Injection';
+$string['injectionresources'] = 'Only page resources that you have access will be listed';
+$string['border'] = 'Border';
 ?>
