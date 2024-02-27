@@ -25,144 +25,6 @@ import React, { Component, useRef } from 'react';
 
 export const Options = [
     {
-        name: M.util.get_string('activities', 'atto_recitautolink'),
-        key: 'activity',
-        cssClasses: true, 
-        tagName: 'a',
-        options: [
-            {
-                input: 'select',
-                name: M.util.get_string('activity', 'atto_recitautolink'),
-                key: 'activity',
-                infoButton: <>
-                <span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>
-                </>,
-                dataProvider: 'cmList',
-                required: true,
-                getOption: function(input){
-                    if (input.value.length > 0){
-                        return "/"+ input.value;
-                    }
-                }
-            },
-            {
-                input: 'text',
-                name: M.util.get_string('linktext', 'atto_recitautolink'),
-                key: 'linktext',
-                placeholderKey: 'activity',
-                getOption: function(input){
-                    if (input.value.length > 0){
-                        return "/desc:\""+ input.value+"\"";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                default: true,
-                label: M.util.get_string('sametab', 'atto_recitautolink'),
-                key: 'opening',
-                getOption: function(input){
-                    if (input.checked){
-                        return "";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                label: M.util.get_string('newtab', 'atto_recitautolink'),
-                key: 'opening',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/b";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                label: M.util.get_string('modal', 'atto_recitautolink'),
-                key: 'opening',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/p";
-                    }
-                }
-            },
-            {
-                name: 'opening',
-                input: 'radio',
-                label: M.util.get_string('modal16x9', 'atto_recitautolink'),
-                key: 'opening',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/p16x9";
-                    }
-                }
-            },
-            {
-                input: 'separator',
-            },
-            {
-                name: 'otheroptions',
-                input: 'checkbox',
-                label: M.util.get_string('icon', 'atto_recitautolink'),
-                key: 'icon',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/i";
-                    }
-                }
-            },
-            {
-                name: 'otheroptions',
-                input: 'checkbox',
-                label: M.util.get_string('completioncheckbox', 'atto_recitautolink'),
-                key: 'completion',
-                getOption: function(input){
-                    if (input.checked){
-                        return "/c";
-                    }
-                }
-            },
-            {
-                input: 'separator',
-            },
-            {
-                name: 'checkboxbtn',
-                input: 'checkbox',
-                label: M.util.get_string('button', 'atto_recitautolink'),
-                helpButton: <>
-                <span>{M.util.get_string('infobs', 'atto_recitautolink')}</span>
-                <br/>
-                <a href="https://getbootstrap.com/docs/4.6/utilities/borders/#border-radius" target="_blank">{M.util.get_string('btnshape', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a><br/>
-                <a href="https://getbootstrap.com/docs/4.6/components/buttons/" target="_blank">{M.util.get_string('btnlook', 'atto_recitautolink')} <i className='p-1 fa fa-info-circle'></i> </a>
-                </>,
-                key: 'activitybtn',
-                assignTo: 'activitycss',
-                getOption: function(input){
-                    if (input.checked){
-                        return "btn btn-primary";
-                    }
-                    else{
-                        return "";
-                    }
-                }
-            },
-            {
-                input: 'text',
-                name: M.util.get_string('cssclass', 'atto_recitautolink'),
-                key: 'activitycss',
-                getOption: function(input){
-                    if (input.value.length > 0){
-                        return "/class:\""+ input.value+"\"";
-                    }
-                }
-            },
-        ]
-    },
-    {
         name: M.util.get_string('sections', 'atto_recitautolink'),
         key: 'section',
         cssClasses: true,
@@ -226,6 +88,7 @@ export const Options = [
                     if (input.value.length > 0){
                         return "/class:\""+ input.value+"\"";
                     }
+                    return "";
                 }
             },
         ]
@@ -529,37 +392,11 @@ export const Options = [
                     if (input.value.length > 0){
                         return "/class:\""+ input.value+"\"";
                     }
+                    return "";
                 }
             }
         ]
     },
-    {
-        name: M.util.get_string('tests', 'atto_recitautolink'),
-        key: 'tests',
-        singleInput: true,
-        options: [
-            {
-                name: 'testcase',
-                input: 'checkbox',
-                label: M.util.get_string('generatetestcode', 'atto_recitautolink'),
-                key: 'info17',
-                ignoreTest: true,
-                getOption: function(input, obj){
-                    if (input.checked){
-                        return obj.generateTestCode();
-                    }
-                }
-            },
-            {
-                name: 'testcasedesc',
-                input: 'desc',
-                label: M.util.get_string('testcase', 'atto_recitautolink'),
-                key: 'info18',
-                getOption: function(input){
-                    return '';
-                }
-            },
-        ]
-    }
+    
 ]
 

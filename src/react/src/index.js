@@ -24,6 +24,7 @@ import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 import {GeneratorView} from "./views/Views";
 import {$glVars} from "./common/common";
+import { MainView } from './views/MainView';
  
 class App extends Component {
     static defaultProps = {
@@ -34,12 +35,10 @@ class App extends Component {
         super(props);
 
         $glVars.classHandler = props.classHandler;
-        this.state = {};
     }
 
     render() {       
-        let main =
-            <GeneratorView onClose={this.onClose}/>
+        let main = <MainView onClose={this.onClose}/>
 
         return (main);
     }

@@ -28,6 +28,7 @@ import {AppOptions} from '../common/Options';
 import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
 import { faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { HelpButton } from './common';
 
 
 export class GeneratorView extends Component {
@@ -36,6 +37,7 @@ export class GeneratorView extends Component {
         this.state = {cmList: [], sectionList: [], h5pList: [], activeTab: 'activity', data: [], values: {}, validated: false, initialized: false};
         this.setTab = this.setTab.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.setData = this.setData.bind(this);
         this.generateCode = this.generateCode.bind(this);
         this.generateTestCode = this.generateTestCode.bind(this);
     }
@@ -143,7 +145,6 @@ export class GeneratorView extends Component {
     }
 
     onChange(e, option){
-        let data = this.state.data;
         let values = this.state.values;
         let name = option.key;
         let validated = this.state.validated;
@@ -164,9 +165,24 @@ export class GeneratorView extends Component {
         }else{
             values[name] = e.target.value;
         }
-        console.log(values[name])
-        data[name] = {opt: opt, required: option.required};
-        this.setState({data: data, values: values, validated: validated});
+        
+        this.setState({values: values, validated: validated}, () => this.setData(option));
+    }
+
+    setData(option){
+        let data = this.state.data;
+        let name = option.key;
+
+        if(option.hasOwnProperty('assignTo')){ 
+            let opt2 = this.getOption(option.assignTo);
+            let input = document.querySelector(`[data-key='${option.assignTo}']`);
+            data[option.assignTo] = {opt: opt2.getOption(input, this), required: false};
+        }
+        else{
+            data[name] = {opt: this.state.values[name], required: option.required};
+        }
+
+        this.setState({data: data});
     }
 
     getInput(option, key){
@@ -358,33 +374,4 @@ export class GeneratorView extends Component {
         this.setState({initialized: true});
     }
  
-}
-
-export class HelpButton extends Component {
-    static defaultProps = {
-        helpText: '',
-        icon: faQuestionCircle
-    }
-
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        const popover = (
-            <Popover id="popover-help">
-              <Popover.Content>
-                {this.props.helpText}
-              </Popover.Content>
-            </Popover>
-          );
-
-         
-        let main =
-            <OverlayTrigger trigger="focus" placement="right" overlay={popover}>
-                 <Button variant="link" className='p-0'><FontAwesomeIcon icon={this.props.icon}/></Button>
-            </OverlayTrigger>;
-
-        return main;
-    }
 }
