@@ -30,6 +30,8 @@ import { faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActivityForm } from './ActivityForm';
 import { TestForm } from './TestForm';
+import { SectionForm } from './SectionForm';
+import { H5PForm } from './H5PForm';
 
 
 export class MainView extends Component {
@@ -96,8 +98,14 @@ export class MainView extends Component {
                 <Tab className={className} title={M.util.get_string('activities', 'atto_recitautolink')} eventKey='activity' style={style}>
                     <ActivityForm cmList={this.state.cmList} onClose={this.props.onClose}/>             
                 </Tab>
+                <Tab className={className} title={M.util.get_string('sections', 'atto_recitautolink')} eventKey='sections' style={style}>
+                    <SectionForm sectionList={this.state.sectionList} onClose={this.props.onClose}/>             
+                </Tab>
+                <Tab className={className} title={M.util.get_string('h5p', 'atto_recitautolink')} eventKey='h5p' style={style}>
+                    <H5PForm h5pList={this.state.h5pList} onClose={this.props.onClose}/>             
+                </Tab>
                 <Tab className={className} title={M.util.get_string('tests', 'atto_recitautolink')} eventKey='tests' style={style}>
-                    <TestForm cmList={this.state.cmList} onClose={this.props.onClose}/>             
+                    <TestForm cmList={this.state.cmList} sectionList={this.state.sectionList} onClose={this.props.onClose}/>             
                 </Tab>
             </Tabs>;
         

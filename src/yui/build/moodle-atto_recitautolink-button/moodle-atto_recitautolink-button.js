@@ -84,14 +84,16 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
     
     createPopup: function(content) {        
         let modal = document.createElement('div');
-        modal.classList.add('modal', 'fade', 'autolink_popup');
+        modal.classList.add('modal', 'fade', 'autolink_popup');        
         modal.setAttribute('style', 'overflow-y: hidden;');
+
         let inner2 = document.createElement('div');
         inner2.classList.add('modal-dialog');
+        inner2.classList.add('modal-xl');
         modal.appendChild(inner2);
+
         let inner = document.createElement('div');
         inner.classList.add('modal-content');
-        inner.setAttribute('style', 'width:650px;');
         inner2.appendChild(inner);
 
         let header = document.createElement('div');
@@ -117,24 +119,29 @@ Y.namespace('M.atto_recitautolink').Button = Y.Base.create('button', Y.M.editor_
         $(modal).on('hidden.bs.modal', function (e) {
             that.destroy();
         });
-      },
+    },
 
-      destroy: function(){
+    destroy: function(){
         $(this.popup).modal('hide')
         this.popup.remove();
-      },
+
+        if(this.appReact){
+            this.appReact.unmount();
+        }
+    },
       
-      update: function(){
+    appReact: null,
+    
+    update: function(){
         $(this.popup).modal('handleUpdate');
-      },
+    },
 
     loadUi: function(){
         if (window.openRecitAutolinkUI){
-            window.openRecitAutolinkUI(this);
+            this.appReact = window.openRecitAutolinkUI(this);
             this.update();
         }
     },
-    
 
     close: function(code){
         this.destroy();

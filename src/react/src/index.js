@@ -28,11 +28,13 @@ import { MainView } from './views/MainView';
  
 class App extends Component {
     static defaultProps = {
-        classHandler: null
+        classHandler: null,
     };
 
     constructor(props) {
         super(props);
+
+        this.onClose = this.onClose.bind(this);
 
         $glVars.classHandler = props.classHandler;
     }
@@ -46,11 +48,11 @@ class App extends Component {
     onClose(val){
         $glVars.classHandler.close(val);
     }
-
 }
 
-window.openRecitAutolinkUI = function(classHandler){ 
+window.openRecitAutolinkUI = function(classHandler){  
     const domContainer = document.getElementById('recitautolink_container');
     const root = createRoot(domContainer);
     root.render(<App classHandler={classHandler}/>);
+    return root;
 };

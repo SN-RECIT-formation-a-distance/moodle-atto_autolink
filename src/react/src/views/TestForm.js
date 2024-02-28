@@ -28,6 +28,7 @@ import { GeneratorCode } from './common';
 export class TestForm extends Component {
     static defaultProps = {
         cmList: [],
+        sectionList: [],
         onClose: null
     };
 
@@ -60,6 +61,15 @@ export class TestForm extends Component {
     }
 
     onGenerateTestCode(){
+        let result = "";
+
+        result = this.generateActivityTestCodes();
+        result += this.generateSectionTestCodes();
+
+        this.props.onClose(result);
+    }
+
+    generateActivityTestCodes(){
         let result = [];
 
         if(this.props.cmList.length === 0){
@@ -92,6 +102,34 @@ export class TestForm extends Component {
             }
         }
 
-        this.props.onClose(result.join("<br/><br/>"));
+        return result.join("<br/><br/>");
+    }
+
+    generateSectionTestCodes(){
+        let result = [];
+
+        if(this.props.sectionList.length === 0){
+            alert("There is no section to generate any test code.");
+            return;
+        }
+
+        let linktext = ['', M.util.get_string('linktext', 'atto_recitautolink')];
+        let sectioncss = ['', 'btn btn-primary'];
+
+        let data = Object.assign(GeneratorCode.sectionData, {});
+        let section = this.props.sectionList[0];
+
+        for(let desc of linktext){
+            for(let css of sectioncss){
+                data.section = section.value;
+                data.linktext = desc;
+                data.sectioncss = css;
+
+                let intCode = GeneratorCode.getSectionCode(data);
+                result.push(`${intCode} => ${intCode.replace('[[', '').replace(']]', '')}`);
+            }
+        }
+
+        return result.join("<br/><br/>");
     }
 }

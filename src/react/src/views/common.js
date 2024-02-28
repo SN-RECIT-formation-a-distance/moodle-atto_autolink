@@ -35,16 +35,27 @@ export class GeneratorCode{
 		activitycss: ''
 	};
 
+	static sectionData = {
+		section: '',
+		linktext: '',
+		sectionbtn: false,
+		sectioncss: ''
+	};
+
+	static h5pData = {
+		h5p: '',
+	};
+
   	static getActivityCode(data){
 		if(data.activity.length === 0){
 			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
-			return;
+			return null;
 		}
 
 		let result = '';
 		//Options first, then required data last
 		if (data.linktext.length > 0){
-			result = `desc:"${data.linktext}/"`;
+			result = `desc:"${data.linktext}"/`;
 		}
 
 		switch(data.opening){
@@ -80,6 +91,40 @@ export class GeneratorCode{
 
 		result = `[[${result}]]`;
 
+		return result;
+  	}
+
+	static getSectionCode(data){
+		if(data.section.length === 0){
+			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
+			return null;
+		}
+
+		let result = '';
+		//Options first, then required data last
+		if (data.linktext.length > 0){
+			result = `desc:"${data.linktext}"/`;
+		}
+
+		if (data.sectioncss.length > 0){
+			result = `class:"${data.sectioncss}"/`;
+		}
+
+		result += `s/${data.section}`;
+
+		result = `[[${result}]]`;
+
+		return result;
+  	}
+	 
+	static getH5PCode(data){
+		if(data.h5p.length === 0){
+			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
+			return null;
+		}
+
+		let result = `h5p/${data.h5p}`;
+		result = `[[${result}]]`;
 		return result;
   	}
 }
