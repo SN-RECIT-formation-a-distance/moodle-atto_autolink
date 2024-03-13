@@ -47,7 +47,7 @@ export class GeneratorCode{
 	};
 
 	static infoData = {
-		info: '',
+		info: ''
 	};
 
 	static injectionActivityData = {

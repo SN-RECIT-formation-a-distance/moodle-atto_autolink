@@ -2,16 +2,18 @@
 $string['pluginname'] = 'RÉCIT autolink';
 $string['privacy:metadata'] = 'This plugin does not store any personal data.';
 
-$string['coursename'] = 'Course name';
-$string['shortcoursename'] = 'course short name';
-$string['studentfirstname'] = 'Student first name';
-$string['studentlastname'] = 'Student last name';
-$string['studentemail'] = 'Student email';
-$string['studentavatar'] = 'Student avatar';
-$string['teacherfirstname'] = 'Teacher first name';
-$string['teacherlastname'] = 'Teacher last name';
-$string['teacheremail'] = 'Teacher email';
-$string['teacheravatar'] = 'Teacher avatar';
+$string['course'] = 'Course';
+$string['fullname'] = 'Fullname';
+$string['shortname'] = 'Short name';
+$string['student'] = 'Student';
+$string['firstname'] = 'First name';
+$string['lastname'] = 'Last name';
+$string['email'] = 'Email';
+$string['avatar'] = 'Avatar';
+$string['teacher'] = 'Teacher';
+$string['progressbar'] = 'Progress Bar';
+$string['allsections'] = 'All sections';
+
 $string['h5p'] = 'H5P';
 $string['sametab'] = 'Same tab';
 $string['newtab'] = 'New tab';

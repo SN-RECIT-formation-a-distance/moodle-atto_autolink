@@ -23,9 +23,12 @@
 import React, { Component } from 'react';
 import {Button, Form, ButtonGroup, } from 'react-bootstrap';
 import { GeneratorCode, HelpButton } from './common';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
 
 export class InfoForm extends Component {
     static defaultProps = {
+        sectionList: [],
         onClose: null
     };
 
@@ -36,7 +39,8 @@ export class InfoForm extends Component {
         this.onInsert = this.onInsert.bind(this);
 
         this.state = {
-            data: { ...GeneratorCode.infoData }
+            data: { ...GeneratorCode.infoData },
+            tmp: {section: ''}
         };
     }
 
@@ -45,80 +49,95 @@ export class InfoForm extends Component {
     }
 
     render() { 
-        let radioId = 1;
+        let radioId = 1; 
 
-        let main = 
+        let sectionListCopy = [...this.props.sectionList];
+        sectionListCopy.unshift({value: 'all', label: `** ${M.util.get_string('allsections', 'atto_recitautolink')} **`});
+        
+        let main =  
         <Form>
+            <div className='h6'>{M.util.get_string('student', 'atto_recitautolink')}</div>
             <Form.Group className="mb-3" controlId={"iteminfo1"}>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('studentfirstname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.firstname'/>
-                </div>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('studentlastname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.lastname'/>
-                </div>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('studentemail', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.email'/>
-                </div>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('studentavatar', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.picture'/>
-                </div>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('firstname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.firstname'/>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('lastname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.lastname'/>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('email', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.email'/>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('avatar', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.picture'/>
             </Form.Group>
 
             <Form.Group ><hr/></Form.Group>
 
+            <div className='h6'>{M.util.get_string('course', 'atto_recitautolink')}</div>
             <Form.Group className="mb-3" controlId={"iteminfo2"}>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('coursename', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/course.fullname'/>
-                </div>
-                <div className="d-flex align-items-center">
-                    <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('shortcoursename', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/course.shortname'/>
-                </div>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('fullname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/course.fullname'/>
+                <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('shortname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/course.shortname'/>
             </Form.Group>
 
             <Form.Group ><hr/></Form.Group>
 
-            {[1, 2, 3].map((profId, index) => (
+            {[1, 2, 3].map((profId, index) => ( 
                 <div key={index}>
+                    <div className='h6'>{`${M.util.get_string('teacher', 'atto_recitautolink')} #${profId}`}</div>
                     <Form.Group className="mb-3" controlId={`iteminfo${index+3}`}>
-                        <div className="d-flex align-items-center">
-                            <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('teacherfirstname', 'atto_recitautolink')} #${profId}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.firstname`}/>
+                        <span className='d-inline-flex'>
+                            <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('firstname', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.firstname`}/>
                             {profId === 1 &&<HelpButton helpText={<span>{M.util.get_string('infoteachernum', 'atto_recitautolink')}</span>}/>}
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('teacherlastname', 'atto_recitautolink')} #${profId}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.lastname`}/>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('teacheremail', 'atto_recitautolink')} #${profId}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.email`}/>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('teacheravatar', 'atto_recitautolink')} #${profId}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.picture`}/>
-                        </div>
+                        </span>
+                        
+                        <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('lastname', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.lastname`}/>
+                        <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('email', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.email`}/>
+                        <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('avatar', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.picture`}/>                        
                     </Form.Group>
-                    <Form.Group ><hr/></Form.Group>
                 </div>
             ))}
+
+            <Form.Group ><hr/></Form.Group>
+
+            <div className='h6'>{M.util.get_string('progressbar', 'atto_recitautolink')}</div>
+            <Form.Group className="mb-3" controlId={"itemsection1"}>
+                <Form.Label className='d-flex align-items-center'>
+                    {M.util.get_string('section', 'atto_recitautolink') + ' '} 
+                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>}/>
+                </Form.Label>
+                <ComboBoxPlus options={sectionListCopy} name='section' onChange={this.onChange} value={this.state.tmp.section}/>
+            </Form.Group>
            
+            <Form.Group ><hr/></Form.Group>
+
             <ButtonGroup className='d-flex'>
                 <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onInsert}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </Form>;
         
-
         return (main);
     }
 
     onChange(e){
         let data = this.state.data;
+        let tmp = this.state.tmp;
 
         let value = e.target.value;
         if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
             value = (e.target.checked ? e.target.value : '');
         }        
         
-        data[e.target.name] = value;
-        
-        this.setState({data: data});
+        if(e.target.name === 'section'){
+            tmp.section = value;
+
+            if(value === 'all'){
+                value = 'cpb/';
+            }
+            else{
+                value = `spb/${value}`;
+            }
+        }
+        else{
+            tmp.section = '';
+        }
+
+        data.info = value;
+
+        this.setState({data: data, tmp: tmp});
     }
 
     onInsert(){

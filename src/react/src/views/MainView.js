@@ -102,7 +102,7 @@ export class MainView extends Component {
                     <H5PForm h5pList={this.state.h5pList} onClose={this.props.onClose}/>             
                 </Tab>
                 <Tab className={className} title={M.util.get_string('information', 'atto_recitautolink')} eventKey='information' style={style}>
-                    <InfoForm onClose={this.props.onClose}/>             
+                    <InfoForm sectionList={this.state.sectionList} onClose={this.props.onClose}/>             
                 </Tab>
                 <Tab className={className} title={M.util.get_string('injection', 'atto_recitautolink')} eventKey='injection' style={style}>
                     <InjectionActivityForm cmList={this.state.cmList} onClose={this.props.onClose}/>             

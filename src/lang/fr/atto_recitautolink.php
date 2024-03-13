@@ -2,16 +2,18 @@
 $string['pluginname'] = 'Autolink';
 $string['privacy:metadata'] = 'Ce plugin ne conserve pas de données personnelles.';
 
-$string['coursename'] = 'Nom complet du cours';
-$string['shortcoursename'] = 'Nom court du cours';
-$string['studentfirstname'] = 'Prénom de l\'élève';
-$string['studentlastname'] = 'Nom de l\'élève';
-$string['studentemail'] = 'Email de l\'élève';
-$string['studentavatar'] = 'Avatar de l\'éleve';
-$string['teacherfirstname'] = 'Prénom de l\'enseignant';
-$string['teacherlastname'] = 'Nom de l\'enseignant';
-$string['teacheremail'] = 'Email de l\'enseignant';
-$string['teacheravatar'] = 'Avatar de l\'enseignant';
+$string['course'] = 'Cours';
+$string['fullname'] = 'Nom complet';
+$string['shortname'] = 'Nom abrégé';
+$string['student'] = 'Student';
+$string['firstname'] = 'Prénom';
+$string['lastname'] = 'Nom';
+$string['email'] = 'Courriel';
+$string['avatar'] = 'Avatar';
+$string['teacher'] = 'Enseignant';
+$string['progressbar'] = 'Barre de progression';
+$string['allsections'] = 'Toutes les sections';
+
 $string['h5p'] = 'H5P';
 $string['sametab'] = 'Même onglet';
 $string['newtab'] = 'Nouvel onglet';
