@@ -21,17 +21,14 @@
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
 import React, { Component } from 'react';
-import {Tabs, Tab, Button, Form, ButtonGroup, Card, OverlayTrigger, Popover} from 'react-bootstrap';
-import { Options } from './OptionList';
+import {Tabs, Tab} from 'react-bootstrap';
 import {$glVars} from '../common/common';
-import {AppOptions} from '../common/Options';
-import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
-import { faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActivityForm } from './ActivityForm';
 import { TestForm } from './TestForm';
 import { SectionForm } from './SectionForm';
 import { H5PForm } from './H5PForm';
+import { InfoForm } from './InfoForm';
+import { InjectionActivityForm } from './InjectionActivityForm';
 
 
 export class MainView extends Component {
@@ -103,6 +100,12 @@ export class MainView extends Component {
                 </Tab>
                 <Tab className={className} title={M.util.get_string('h5p', 'atto_recitautolink')} eventKey='h5p' style={style}>
                     <H5PForm h5pList={this.state.h5pList} onClose={this.props.onClose}/>             
+                </Tab>
+                <Tab className={className} title={M.util.get_string('information', 'atto_recitautolink')} eventKey='information' style={style}>
+                    <InfoForm onClose={this.props.onClose}/>             
+                </Tab>
+                <Tab className={className} title={M.util.get_string('injection', 'atto_recitautolink')} eventKey='injection' style={style}>
+                    <InjectionActivityForm cmList={this.state.cmList} onClose={this.props.onClose}/>             
                 </Tab>
                 <Tab className={className} title={M.util.get_string('tests', 'atto_recitautolink')} eventKey='tests' style={style}>
                     <TestForm cmList={this.state.cmList} sectionList={this.state.sectionList} onClose={this.props.onClose}/>             

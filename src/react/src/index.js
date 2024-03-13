@@ -20,13 +20,12 @@
  * @copyright  2019 RECIT
  * @license    {@link http://www.gnu.org/licenses/gpl-3.0.html} GNU GPL v3 or later
  */
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import { createRoot } from 'react-dom/client';
-import {GeneratorView} from "./views/Views";
 import {$glVars} from "./common/common";
 import { MainView } from './views/MainView';
  
-class App extends Component {
+class App extends Component { 
     static defaultProps = {
         classHandler: null,
     };

@@ -46,6 +46,17 @@ export class GeneratorCode{
 		h5p: '',
 	};
 
+	static infoData = {
+		info: '',
+	};
+
+	static injectionActivityData = {
+		activity: '',
+		opening: '',
+		activitybtn: false,
+		activitycss: ''
+	};
+
   	static getActivityCode(data){
 		if(data.activity.length === 0){
 			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
@@ -54,23 +65,9 @@ export class GeneratorCode{
 
 		let result = '';
 		//Options first, then required data last
-		if (data.linktext.length > 0){
-			result = `desc:"${data.linktext}"/`;
-		}
-
-		switch(data.opening){
-			case 'newtab':
-				result += `b/`;
-				break;
-			case 'modal':
-				result += `p/`;
-				break;
-			case 'modal16x9':
-				result += `p16x9/`;
-				break;
-			default:
-				result += '';
-		}
+		result = GeneratorCode.getLinkTextIntCode(data.linktext);
+		
+		result += GeneratorCode.getOpeningIntCode(data.opening);
 
 		switch(data.otheroptions){
 			case 'icon':
@@ -83,9 +80,7 @@ export class GeneratorCode{
 				result += ''; 
 		}
 
-		if (data.activitycss.length > 0){
-			result = `class:"${data.activitycss}"/`;
-		}
+		result += GeneratorCode.getCssIntCode(data.activitycss);
 
 		result += `${data.activity}`;
 
@@ -102,13 +97,9 @@ export class GeneratorCode{
 
 		let result = '';
 		//Options first, then required data last
-		if (data.linktext.length > 0){
-			result = `desc:"${data.linktext}"/`;
-		}
+		result = GeneratorCode.getLinkTextIntCode(data.linktext);
 
-		if (data.sectioncss.length > 0){
-			result = `class:"${data.sectioncss}"/`;
-		}
+		result += GeneratorCode.getCssIntCode(data.sectioncss);
 
 		result += `s/${data.section}`;
 
@@ -127,6 +118,77 @@ export class GeneratorCode{
 		result = `[[${result}]]`;
 		return result;
   	}
+
+	static getInfoCode(data){
+		if(data.info.length === 0){
+			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
+			return null;
+		} 
+
+		let result = `[[${data.info}]]`;
+		
+		return result;
+  	}
+
+	static getInjectionActivityCode(data){
+		if(data.activity.length === 0){
+			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
+			return null;
+		}
+
+		let result = '';
+		//Options first, then required data last
+
+		result += GeneratorCode.getOpeningIntCode(data.opening);
+
+		result += GeneratorCode.getCssIntCode(data.activitycss);
+
+		result += `f/${data.activity}`;
+
+		result = `[[${result}]]`;
+
+		return result;
+  	}
+
+	static getOpeningIntCode(opening){
+		let result = '';
+
+		switch(opening){
+			case 'newtab':
+				result = `b/`;
+				break;
+			case 'modal':
+				result = `p/`;
+				break;
+			case 'modal16x9':
+				result = `p16x9/`;
+				break;
+			default:
+				result += '';
+		}
+
+		return result;
+	}
+
+	static getLinkTextIntCode(linktext){
+		let result = '';
+
+		if (linktext.length > 0){
+			result = `desc:"${linktext}"/`;
+		}
+
+		return result;
+	}
+
+	static getCssIntCode(css){
+		let result = '';
+
+		if (css.length > 0){
+			result = `class:"${css}"/`;
+		}
+
+		return result;
+	}
 }
 
 export class HelpButton extends Component {

@@ -29,6 +29,7 @@ export class TestForm extends Component {
     static defaultProps = {
         cmList: [],
         sectionList: [],
+        h5pList: [],
         onClose: null
     };
 
@@ -65,10 +66,13 @@ export class TestForm extends Component {
 
         result = this.generateActivityTestCodes();
         result += this.generateSectionTestCodes();
+        result += this.generateH5PTestCodes();
+        result += this.generateInfoTestCodes();
+        result += this.generateInjectionActivityTestCodes();
 
         this.props.onClose(result);
     }
-
+ 
     generateActivityTestCodes(){
         let result = [];
 
@@ -126,6 +130,77 @@ export class TestForm extends Component {
                 data.sectioncss = css;
 
                 let intCode = GeneratorCode.getSectionCode(data);
+                result.push(`${intCode} => ${intCode.replace('[[', '').replace(']]', '')}`);
+            }
+        }
+
+        return result.join("<br/><br/>");
+    }
+
+    generateH5PTestCodes(){
+        let result = [];
+
+        if(this.props.h5pList.length === 0){
+            alert("There is no H5P to generate any test code.");
+            return;
+        }
+
+        let data = Object.assign(GeneratorCode.h5pData, {});
+        let item = this.props.h5pList[0];
+
+        data.h5p = item.value;
+
+        let intCode = GeneratorCode.getSectionCode(data);
+        result.push(`${intCode} => ${intCode.replace('[[', '').replace(']]', '')}`);
+
+        return result.join("<br/><br/>");
+    }
+
+    generateInfoTestCodes(){
+        let result = [];
+
+        let data = Object.assign(GeneratorCode.infoData, {});
+        let infoList = ['d/user.firstname', 'd/user.lastname', 'd/user.email', 'd/user.picture',
+                        'd/course.fullname', 'd/course.shortname', 'd/teacher1.firstname', 
+                    'd/teacher1.lastname', 'd/teacher1.email', 'd/teacher1.picture',
+                    'd/teacher2.firstname', 'd/teacher2.lastname', 'd/teacher2.email', 
+                    'd/teacher2.picture','d/teacher3.firstname', 'd/teacher3.lastname', 
+                    'd/teacher3.email', 'd/teacher3.picture',];
+
+        for(let item of infoList){
+            data.info = item;
+            let intCode = GeneratorCode.getInfoCode(data);
+            result.push(`${intCode} => ${intCode.replace('[[', '').replace(']]', '')}`);
+        }
+
+        return result.join("<br/><br/>");
+    }
+
+    generateInjectionActivityTestCodes(){
+        let result = [];
+
+        let cmListFiltered = this.props.cmList.filter((item) => {
+            return (item.label.search(/\[page\]/g) >= 0)
+        });
+
+        if(cmListFiltered.length === 0){
+            alert("There is no activity to generate any test code.");
+            return;
+        }
+
+        let opening = ['newtab', 'modal', 'modal16x9'];
+        let activitycss = ['', 'border rounded p-2'];
+
+        let data = Object.assign(GeneratorCode.injectionActivityData, {});
+        let activity = cmListFiltered[0];
+
+        for(let open of opening){
+            for(let css of activitycss){
+                data.activity = activity.value;
+                data.opening =  open;
+                data.activitycss = css;
+
+                let intCode = GeneratorCode.getInjectionActivityCode(data);
                 result.push(`${intCode} => ${intCode.replace('[[', '').replace(']]', '')}`);
             }
         }
