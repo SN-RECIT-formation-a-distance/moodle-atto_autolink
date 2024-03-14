@@ -67,4 +67,8 @@ export class AppWebApi extends WebApi
         this.queryMoodle('atto_recitautolink_get_h5p_list', {courseid: parseInt(cId)}, onSuccess);
     }
 
+    getRoleList(cId, onSuccess){
+        this.queryMoodle('atto_recitautolink_get_role_list', {courseid: parseInt(cId)}, onSuccess);
+    }
+
 };

@@ -43,6 +43,10 @@ $string['activity'] = 'Activity';
 $string['infoteachernum'] = 'Teacher #1 corresponds to the first given name found in alphabetical order. If the student is associated with a group, the correspondence with the teacher is filtered according to the group';
 $string['activities'] = 'Activities';
 $string['injection'] = 'Injection';
-$string['injectionresources'] = 'Only page resources that you have access will be listed';
-$string['border'] = 'Border';
+$string['injectionresources'] = 'The HTML content of the selected page will be injected at the location of the generated integration code.';
+$string['border'] = 'Classe Bootstrap';
+$string['progressbarinfo'] = 'The progress bar measures the percentage of visible completed activities that have a completion tracker.';
+$string['displaybyrole'] = 'Display by role(s)';
+$string['displaybyroleinfo'] = 'The visibility of the link depends on the role(s) selected.';
+
 ?>

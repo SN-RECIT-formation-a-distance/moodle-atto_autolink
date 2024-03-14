@@ -32,7 +32,8 @@ export class GeneratorCode{
 		opening: '',
 		otheroptions: '',
 		activitybtn: false,
-		activitycss: ''
+		activitycss: '',
+		roles: []
 	};
 
 	static sectionData = {
@@ -80,6 +81,10 @@ export class GeneratorCode{
 				result += ''; 
 		}
 
+		if(data.roles.length > 0){
+			result += `roles:${data.roles.join(",")}/`;
+		}
+		
 		result += GeneratorCode.getCssIntCode(data.activitycss);
 
 		result += `${data.activity}`;

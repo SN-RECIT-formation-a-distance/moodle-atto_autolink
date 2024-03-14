@@ -56,7 +56,7 @@ export class InjectionActivityForm extends Component {
         <Form>
             <Form.Group className="mb-3" controlId={"iteminjectionactivity1"}>
                 <Form.Label className='d-flex align-items-center'>
-                    {M.util.get_string('activity', 'atto_recitautolink') + ' '} 
+                    <span className='mr-1'>{M.util.get_string('activity', 'atto_recitautolink')}</span>
                     <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('injectionresources', 'atto_recitautolink')}</span>}/>
                 </Form.Label>
                 <ComboBoxPlus options={cmListFiltered} name='activity' onChange={this.onChange} value={this.state.data.activity}/>

@@ -80,7 +80,7 @@ export class InfoForm extends Component {
                     <Form.Group className="mb-3" controlId={`iteminfo${index+3}`}>
                         <span className='d-inline-flex'>
                             <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('firstname', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.firstname`}/>
-                            {profId === 1 &&<HelpButton helpText={<span>{M.util.get_string('infoteachernum', 'atto_recitautolink')}</span>}/>}
+                            {profId === 1 &&<HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('infoteachernum', 'atto_recitautolink')}</span>}/>}
                         </span>
                         
                         <Form.Check  className="m-1" id={`info${radioId++}`} inline type='radio' label={`${M.util.get_string('lastname', 'atto_recitautolink')}`} name='info' onChange={this.onChange} value={`d/teacher${profId}.lastname`}/>
@@ -93,15 +93,15 @@ export class InfoForm extends Component {
             <Form.Group ><hr/></Form.Group>
 
             <div className='h6'>{M.util.get_string('progressbar', 'atto_recitautolink')}</div>
-            <Form.Group className="mb-3" controlId={"itemsection1"}>
+            <Form.Group className="mb-3" controlId={"itemsection1"} style={{height: 200}}>
                 <Form.Label className='d-flex align-items-center'>
-                    {M.util.get_string('section', 'atto_recitautolink') + ' '} 
-                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>}/>
+                    <span className='mr-1'>{M.util.get_string('section', 'atto_recitautolink')}</span> 
+                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('progressbarinfo', 'atto_recitautolink')}</span>}/>
                 </Form.Label>
                 <ComboBoxPlus options={sectionListCopy} name='section' onChange={this.onChange} value={this.state.tmp.section}/>
             </Form.Group>
            
-            <Form.Group ><hr/></Form.Group>
+            <Form.Group ><hr/></Form.Group> 
 
             <ButtonGroup className='d-flex'>
                 <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>

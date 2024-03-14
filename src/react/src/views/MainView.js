@@ -38,7 +38,13 @@ export class MainView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {cmList: [], sectionList: [], h5pList: [], activeTab: 'activity'};
+        this.state = {
+            cmList: [], 
+            sectionList: [], 
+            h5pList: [], 
+            roleList: [],
+            activeTab: 'activity'
+        };
         this.setTab = this.setTab.bind(this);
     }
 
@@ -85,15 +91,28 @@ export class MainView extends Component {
             }
             that.setState({h5pList: list});
         });
+
+        $glVars.webApi.getRoleList($glVars.classHandler.get("courseid"), function(result){
+            if(result.error){
+                alert(result.error);
+                return;
+            }
+
+            let list = [];
+            for (let e of result[0].data){
+                list.push({value: e.archetype, label: e.localname});
+            }
+            that.setState({roleList: list});
+        });
     }
 
     render() {             
-        let style = {overflowY: "auto", height: 500, scrollbarWidth: 'thin'};
+        let style = {overflowY: "auto", maxHeight: "calc(90vh - 200px)", scrollbarWidth: 'thin'};
         let className = 'p-2';
         let main = 
             <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
                 <Tab className={className} title={M.util.get_string('activities', 'atto_recitautolink')} eventKey='activity' style={style}>
-                    <ActivityForm cmList={this.state.cmList} onClose={this.props.onClose}/>             
+                    <ActivityForm cmList={this.state.cmList} roleList={this.state.roleList} onClose={this.props.onClose}/>             
                 </Tab>
                 <Tab className={className} title={M.util.get_string('sections', 'atto_recitautolink')} eventKey='sections' style={style}>
                     <SectionForm sectionList={this.state.sectionList} onClose={this.props.onClose}/>             

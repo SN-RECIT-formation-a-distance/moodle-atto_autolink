@@ -52,7 +52,7 @@ export class SectionForm extends Component {
         <Form>
             <Form.Group className="mb-3" controlId={"itemsection1"}>
                 <Form.Label className='d-flex align-items-center'>
-                    {M.util.get_string('section', 'atto_recitautolink') + ' '} 
+                    <span className='mr-1'>{M.util.get_string('section', 'atto_recitautolink')}</span>
                     <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>}/>
                 </Form.Label>
                 <ComboBoxPlus options={this.props.sectionList} name='section' onChange={this.onChange} value={this.state.data.section}/>

@@ -78,3 +78,59 @@ export class ComboBoxPlus extends Component {
         this.props.onChange({target:{name: this.props.name, value: value, text: text, data: event.data}});
     }   
 }
+
+
+export class ComboBoxPlusMulti extends Component {
+    static defaultProps = {        
+        onChange: null,    
+        value: "",
+        name: "",
+        disabled: false,
+        required: false,
+        data: {},
+        size: 1,
+        placeholder: "",
+        options: [],
+        style: null,
+        selectedIndex: -1
+    };
+    
+    constructor(props){
+        super(props);
+        
+        this.onChange = this.onChange.bind(this);
+        this.state = {value: this.props.value};
+    }
+    
+    render() { 
+        //  spread attributes <div {...this.props}>    
+        let spreadAttr = {isMulti: true, required: this.props.required, disabled: this.props.disabled, size: this.props.size, style: this.props.style, options: this.props.options};
+
+        let values = [];
+
+        for(let item1 of this.props.value){
+            for(let item2 of this.props.options){
+                if(item1 === item2.value){
+                    values.push({...item2});
+                    break;
+                }
+            }
+        } 
+
+        let main = 
+            <Select {...spreadAttr} onChange={this.onChange} defaultValue={values} placeholder={this.props.placeholder}>
+            </Select>;            
+        return (main);
+    }   
+    
+    onChange(event){
+        let value = [];
+        let text = event.label;
+
+        for(let item of event){
+            value.push(item.value);
+        }
+        this.setState({value:value});
+        this.props.onChange({target:{name: this.props.name, value: value, text: text, data: this.props.data}});
+    }   
+}

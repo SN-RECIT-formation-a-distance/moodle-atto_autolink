@@ -43,6 +43,10 @@ $string['activity'] = 'Activité';
 $string['activities'] = 'Activités';
 $string['infoteachernum'] = "L'enseignant #1 correspond au premier prénom trouvé par ordre alphabétique. Si l'élève est associé à un groupe, la correspondance avec l'enseignant est filtrée en fonction du groupe.";
 $string['injection'] = 'Injection';
-$string['injectionresources'] = 'Seules les ressources de type page dont vous avez accès seront affichées';
-$string['border'] = 'Bordure';
+$string['injectionresources'] = 'Le contenu HTML de la page sélectionnée sera injecté à l\'endroit du code d\'intégration généré.';
+$string['border'] = 'Classe Bootstrap';
+$string['progressbarinfo'] = 'La barre de progression mesure le pourcentage des activités visibles complétées possédant un suivi d\'achèvement.';
+$string['displaybyrole'] = 'Afficher selon le(s) rôle(s)';
+$string['displaybyroleinfo'] = 'La visibilité du lien s\'effectue selon le(s) rôle(s) sélectionnée(s).';
+
 ?>

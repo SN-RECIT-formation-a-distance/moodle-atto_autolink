@@ -131,4 +131,34 @@ class atto_recitautolink_external extends external_api {
         }
         return $result;
     }
+
+    public static function get_role_list_parameters() {
+        return new external_function_parameters(array('courseid' => new external_value(PARAM_INT, VALUE_REQUIRED)));
+    }
+    
+    public static function get_role_list_returns() {
+        return new external_multiple_structure(
+            new external_single_structure(
+                array(
+                    'archetype' => new external_value(PARAM_TEXT, 'role archetype'),
+                    'localname' => new external_value(PARAM_TEXT, 'role local name'),
+                )
+            )
+        );
+    }
+
+    public static function get_role_list($courseid) {
+        $params = self::validate_parameters(
+                        self::get_role_list_parameters(),
+                        array('courseid' => $courseid));
+
+        $result = array();
+        $coursecontext = \context_course::instance($params['courseid']);
+        $rolelist = role_get_names($coursecontext);
+        
+        foreach ($rolelist as $item){
+            $result[] = array('archetype' => $item->archetype, 'localname' => $item->localname);
+        }
+        return $result;
+    }
 }

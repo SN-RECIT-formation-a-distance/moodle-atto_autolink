@@ -72,7 +72,10 @@ function atto_recitautolink_strings_for_js() {
                                             'allsections',
                                             'injection',
                                             'injectionresources',
-                                            'border'
+                                            'border',
+                                            'progressbarinfo',
+                                            'displaybyrole',
+                                            'displaybyroleinfo'
                                         ),
                                     'atto_recitautolink');
 }

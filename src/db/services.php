@@ -48,6 +48,13 @@ $functions = array(
         'type'        => 'read',
         'ajax'        => true,
 ),
-
+'atto_recitautolink_get_role_list' => array(
+        'classname'   => 'atto_recitautolink_external',
+        'methodname'  => 'get_role_list',
+        'classpath'   => '/lib/editor/atto/plugins/recitautolink/externallib.php',
+        'description' => 'Returns role list',
+        'type'        => 'read',
+        'ajax'        => true,
+),
 
 );

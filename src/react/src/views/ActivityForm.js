@@ -22,13 +22,14 @@
  */
 import React, { Component } from 'react';
 import {Button, Form, ButtonGroup, } from 'react-bootstrap';
-import { ComboBoxPlus } from '../libs/components/ComboBoxPlus';
+import { ComboBoxPlus, ComboBoxPlusMulti } from '../libs/components/ComboBoxPlus';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { GeneratorCode, HelpButton } from './common';
 
 export class ActivityForm extends Component {
     static defaultProps = {
         cmList: [],
+        roleList: [],
         onClose: null
     };
 
@@ -52,7 +53,7 @@ export class ActivityForm extends Component {
         <Form>
             <Form.Group className="mb-3" controlId={"itemactivity1"}>
                 <Form.Label className='d-flex align-items-center'>
-                    {M.util.get_string('activity', 'atto_recitautolink') + ' '} 
+                    <span className='mr-1'>{M.util.get_string('activity', 'atto_recitautolink')}</span> 
                     <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>}/>
                 </Form.Label>
                 <ComboBoxPlus options={this.props.cmList} name='activity' onChange={this.onChange} value={this.state.data.activity}/>
@@ -84,6 +85,15 @@ export class ActivityForm extends Component {
                     <Form.Check className="m-1" id='otheroptions2' inline type='checkbox' label={M.util.get_string('completioncheckbox', 'atto_recitautolink')} name='otheroptions' onChange={this.onChange} value='completion'/>
                 </div>
             </Form.Group>  
+            <Form.Group ><hr/></Form.Group>
+            <Form.Group className="mb-3" controlId={"itemactivity8"}>
+                <Form.Label className='d-flex align-items-center'>
+                    <span className='mr-1'>{M.util.get_string('displaybyrole', 'atto_recitautolink')}</span>
+                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('displaybyroleinfo', 'atto_recitautolink')}</span>}/>
+                </Form.Label>
+                <ComboBoxPlusMulti name="roles" value={this.state.data.roles} onChange={this.onChange} options={this.props.roleList}/>
+            </Form.Group> 
+
             <Form.Group ><hr/></Form.Group>
             <Form.Group controlId={"itemactivity5"}>
                 <div className='d-flex align-items-center'>
