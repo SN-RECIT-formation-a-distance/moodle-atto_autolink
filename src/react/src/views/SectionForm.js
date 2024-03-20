@@ -90,7 +90,7 @@ export class SectionForm extends Component {
             <Form.Group ><hr/></Form.Group>
 
             <ButtonGroup className='d-flex'>
-                <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                <Button variant="secondary" onClick={() => this.props.onClose(null)}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onInsert}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </Form>;

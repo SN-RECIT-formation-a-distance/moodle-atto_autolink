@@ -50,7 +50,7 @@ export class H5PForm extends Component {
     render() {       
         let main = 
         <Form>
-            <Form.Group className="mb-3" controlId={"itemh5p1"}>
+            <Form.Group className="mb-3" controlId={"itemh5p1"} style={{height: 200}}>
                 <Form.Label className='d-flex align-items-center'>
                     <span className='mr-1'>{M.util.get_string('h5p', 'atto_recitautolink')}</span>
                     <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('resourceaccess', 'atto_recitautolink')}</span>}/>
@@ -61,7 +61,7 @@ export class H5PForm extends Component {
             <Form.Group ><hr/></Form.Group>
 
             <ButtonGroup className='d-flex'>
-                <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                <Button variant="secondary" onClick={() => this.props.onClose(null)}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onInsert}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </Form>;

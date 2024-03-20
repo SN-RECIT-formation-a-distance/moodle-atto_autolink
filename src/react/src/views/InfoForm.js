@@ -40,7 +40,7 @@ export class InfoForm extends Component {
 
         this.state = {
             data: { ...GeneratorCode.infoData },
-            tmp: {section: ''}
+            tmp: {section: '', input: null}
         };
     }
 
@@ -56,6 +56,17 @@ export class InfoForm extends Component {
         
         let main =  
         <Form>
+            <div className='h6'>{M.util.get_string('progressbar', 'atto_recitautolink')}</div>
+            <Form.Group className="mb-3" controlId={"itemsection1"} >
+                <Form.Label className='d-flex align-items-center'>
+                    <span className='mr-1'>{M.util.get_string('section', 'atto_recitautolink')}</span> 
+                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('progressbarinfo', 'atto_recitautolink')}</span>}/>
+                </Form.Label>
+                <ComboBoxPlus options={sectionListCopy} name='section' onChange={this.onChange} value={this.state.tmp.section}/>
+            </Form.Group>
+           
+            <Form.Group ><hr/></Form.Group> 
+
             <div className='h6'>{M.util.get_string('student', 'atto_recitautolink')}</div>
             <Form.Group className="mb-3" controlId={"iteminfo1"}>
                 <Form.Check  className="m-2" id={`info${radioId++}`} inline type='radio' label={M.util.get_string('firstname', 'atto_recitautolink')} name='info' onChange={this.onChange} value='d/user.firstname'/>
@@ -92,19 +103,8 @@ export class InfoForm extends Component {
 
             <Form.Group ><hr/></Form.Group>
 
-            <div className='h6'>{M.util.get_string('progressbar', 'atto_recitautolink')}</div>
-            <Form.Group className="mb-3" controlId={"itemsection1"} style={{height: 200}}>
-                <Form.Label className='d-flex align-items-center'>
-                    <span className='mr-1'>{M.util.get_string('section', 'atto_recitautolink')}</span> 
-                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('progressbarinfo', 'atto_recitautolink')}</span>}/>
-                </Form.Label>
-                <ComboBoxPlus options={sectionListCopy} name='section' onChange={this.onChange} value={this.state.tmp.section}/>
-            </Form.Group>
-           
-            <Form.Group ><hr/></Form.Group> 
-
             <ButtonGroup className='d-flex'>
-                <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                <Button variant="secondary" onClick={() => this.props.onClose(null)}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onInsert}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </Form>;
@@ -116,9 +116,18 @@ export class InfoForm extends Component {
         let data = this.state.data;
         let tmp = this.state.tmp;
 
+        // reset data each on change
+        data.info = '';
+        tmp.section = '';
+
+        if(tmp.input){
+            tmp.input.checked = false;
+        }
+
         let value = e.target.value;
         if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
             value = (e.target.checked ? e.target.value : '');
+            tmp.input = e.target;
         }        
         
         if(e.target.name === 'section'){
@@ -130,9 +139,6 @@ export class InfoForm extends Component {
             else{
                 value = `spb/${value}`;
             }
-        }
-        else{
-            tmp.section = '';
         }
 
         data.info = value;

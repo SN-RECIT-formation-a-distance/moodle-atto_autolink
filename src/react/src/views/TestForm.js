@@ -53,7 +53,7 @@ export class TestForm extends Component {
             </Form.Group>
 
             <ButtonGroup className='d-flex'>
-                <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                <Button variant="secondary" onClick={() => this.props.onClose(null)}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onGenerateTestCode}>{M.util.get_string('generatetestcode', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </div>;

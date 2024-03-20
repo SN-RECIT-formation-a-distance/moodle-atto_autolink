@@ -62,6 +62,19 @@ export class ActivityForm extends Component {
                 <Form.Label>{M.util.get_string('linktext', 'atto_recitautolink')}</Form.Label>
                 <Form.Control placeholder={this.state.data.activity} type="text" name='linktext' onChange={this.onChange} value={this.state.data.linktext}/>
             </Form.Group>
+                        
+            <Form.Group ><hr/></Form.Group>
+
+            <Form.Group className="mb-3" controlId={"itemactivity8"}>
+                <Form.Label className='d-flex align-items-center'>
+                    <span className='mr-1'>{M.util.get_string('displaybyrole', 'atto_recitautolink')}</span>
+                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('displaybyroleinfo', 'atto_recitautolink')}</span>}/>
+                </Form.Label>
+                <ComboBoxPlusMulti name="roles" value={this.state.data.roles} onChange={this.onChange} options={this.props.roleList}/>
+            </Form.Group> 
+            
+            <Form.Group ><hr/></Form.Group>
+
             <Form.Group controlId={"itemactivity3"}>
                 <div className="d-flex align-items-center">
                     <Form.Check  className="m-1" id={`opening1`} inline type='radio' label={M.util.get_string('sametab', 'atto_recitautolink')} name='opening' onChange={this.onChange} value='sametab'/>
@@ -85,16 +98,9 @@ export class ActivityForm extends Component {
                     <Form.Check className="m-1" id='otheroptions2' inline type='checkbox' label={M.util.get_string('completioncheckbox', 'atto_recitautolink')} name='otheroptions' onChange={this.onChange} value='completion'/>
                 </div>
             </Form.Group>  
-            <Form.Group ><hr/></Form.Group>
-            <Form.Group className="mb-3" controlId={"itemactivity8"}>
-                <Form.Label className='d-flex align-items-center'>
-                    <span className='mr-1'>{M.util.get_string('displaybyrole', 'atto_recitautolink')}</span>
-                    <HelpButton icon={faInfoCircle} helpText={<span>{M.util.get_string('displaybyroleinfo', 'atto_recitautolink')}</span>}/>
-                </Form.Label>
-                <ComboBoxPlusMulti name="roles" value={this.state.data.roles} onChange={this.onChange} options={this.props.roleList}/>
-            </Form.Group> 
 
             <Form.Group ><hr/></Form.Group>
+
             <Form.Group controlId={"itemactivity5"}>
                 <div className='d-flex align-items-center'>
                     <Form.Check className="m-1" id='activitybtn' inline type='checkbox' label={M.util.get_string('button', 'atto_recitautolink')} name='activitybtn' onChange={this.onChange} value='btn btn-primary'/>
@@ -122,7 +128,7 @@ export class ActivityForm extends Component {
             <Form.Group ><hr/></Form.Group>
 
             <ButtonGroup className='d-flex'>
-                <Button variant="secondary" onClick={this.props.onClose}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
+                <Button variant="secondary" onClick={() => this.props.onClose(null)}>{M.util.get_string('cancel', 'atto_recitautolink')}</Button>
                 <Button onClick={this.onInsert}>{M.util.get_string('insert', 'atto_recitautolink')}</Button>
             </ButtonGroup>  
         </Form>;
