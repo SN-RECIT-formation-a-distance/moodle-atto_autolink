@@ -30,10 +30,15 @@ export class GeneratorCode{
 		activity: '',
 		linktext: '',
 		opening: '',
-		otheroptions: '',
+		otheroptions: new Set(),
 		activitybtn: false,
 		activitycss: '',
 		roles: []
+	};
+
+	static qrCodeData = {
+		activity: '',
+		opening: '',
 	};
 
 	static sectionData = {
@@ -70,22 +75,41 @@ export class GeneratorCode{
 		
 		result += GeneratorCode.getOpeningIntCode(data.opening);
 
-		switch(data.otheroptions){
-			case 'icon':
-				result += `i/`;
-				break;
-			case 'completion':
-				result += `c/`;
-				break;
-			default:
-				result += ''; 
-		}
+		data.otheroptions.forEach((value1, value2, set) => {
+			switch(value1){
+				case 'icon':
+					result += `i/`;
+					break;
+				case 'completion':
+					result += `c/`;
+					break;
+				default:
+					result += ''; 
+			}
+		});
 
 		if(data.roles.length > 0){
 			result += `roles:${data.roles.join(",")}/`;
 		}
 		
 		result += GeneratorCode.getCssIntCode(data.activitycss);
+
+		result += `${data.activity}`;
+
+		result = `[[${result}]]`;
+
+		return result;
+  	}
+
+	  static getQRCode(data){
+		if(data.activity.length === 0){
+			alert(M.util.get_string('invalidcode', 'atto_recitautolink'));
+			return null;
+		}
+
+		let result = '';
+		//Options first, then required data last
+		result += GeneratorCode.getOpeningIntCode(data.opening);
 
 		result += `${data.activity}`;
 
@@ -167,6 +191,12 @@ export class GeneratorCode{
 				break;
 			case 'modal16x9':
 				result = `p16x9/`;
+				break;
+			case 'qr':
+				result = `qr/`;
+				break;
+			case 'qr100':
+				result = `qr100/`;
 				break;
 			default:
 				result += '';

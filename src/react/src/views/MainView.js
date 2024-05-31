@@ -29,6 +29,7 @@ import { SectionForm } from './SectionForm';
 import { H5PForm } from './H5PForm';
 import { InfoForm } from './InfoForm';
 import { InjectionActivityForm } from './InjectionActivityForm';
+import { QRCodeForm } from './QRCodeForm';
 
 
 export class MainView extends Component {
@@ -113,6 +114,9 @@ export class MainView extends Component {
             <Tabs activeKey={this.state.activeTab} onSelect={this.setTab} className="mb-3" variant="pills">
                 <Tab className={className} title={M.util.get_string('activities', 'atto_recitautolink')} eventKey='activity' style={style}>
                     <ActivityForm cmList={this.state.cmList} roleList={this.state.roleList} onClose={this.props.onClose}/>             
+                </Tab>
+                <Tab className={className} title={M.util.get_string('qrcode', 'atto_recitautolink')} eventKey='qrcode' style={style}>
+                    <QRCodeForm cmList={this.state.cmList} onClose={this.props.onClose}/>             
                 </Tab>
                 <Tab className={className} title={M.util.get_string('sections', 'atto_recitautolink')} eventKey='sections' style={style}>
                     <SectionForm sectionList={this.state.sectionList} onClose={this.props.onClose}/>             

@@ -82,11 +82,11 @@ export class TestForm extends Component {
         }
 
         let linktext = ['', M.util.get_string('linktext', 'atto_recitautolink')];
-        let opening = ['newtab', 'modal', 'modal16x9'];
+        let opening = ['newtab', 'modal', 'modal16x9']; //, 'qr', 'qr100'
         let otheroptions = ['icon', 'completion'];
         let activitycss = ['', 'btn btn-primary'];
 
-        let data = Object.assign(GeneratorCode.activityData, {});
+        let data = Object.assign({}, GeneratorCode.activityData);
         let activity = this.props.cmList[0];
 
         for(let desc of linktext){
@@ -96,7 +96,7 @@ export class TestForm extends Component {
                         data.activity = activity.value;
                         data.linktext = desc;
                         data.opening =  open;
-                        data.otheroptions = opt;
+                        data.otheroptions.add(opt);
                         data.activitycss = css;
 
                         let intCode = GeneratorCode.getActivityCode(data);
@@ -120,7 +120,7 @@ export class TestForm extends Component {
         let linktext = ['', M.util.get_string('linktext', 'atto_recitautolink')];
         let sectioncss = ['', 'btn btn-primary'];
 
-        let data = Object.assign(GeneratorCode.sectionData, {});
+        let data = Object.assign({}, GeneratorCode.sectionData);
         let section = this.props.sectionList[0];
 
         for(let desc of linktext){
@@ -145,7 +145,7 @@ export class TestForm extends Component {
             return;
         }
 
-        let data = Object.assign(GeneratorCode.h5pData, {});
+        let data = Object.assign({}, GeneratorCode.h5pData);
         let item = this.props.h5pList[0];
 
         data.h5p = item.value;
@@ -159,7 +159,7 @@ export class TestForm extends Component {
     generateInfoTestCodes(){
         let result = [];
 
-        let data = Object.assign(GeneratorCode.infoData, {});
+        let data = Object.assign({}, GeneratorCode.infoData);
         let infoList = ['d/user.firstname', 'd/user.lastname', 'd/user.email', 'd/user.picture',
                         'd/course.fullname', 'd/course.shortname', 'd/teacher1.firstname', 
                     'd/teacher1.lastname', 'd/teacher1.email', 'd/teacher1.picture',
@@ -191,7 +191,7 @@ export class TestForm extends Component {
         let opening = ['newtab', 'modal', 'modal16x9'];
         let activitycss = ['', 'border rounded p-2'];
 
-        let data = Object.assign(GeneratorCode.injectionActivityData, {});
+        let data = Object.assign({}, GeneratorCode.injectionActivityData);
         let activity = cmListFiltered[0];
 
         for(let open of opening){

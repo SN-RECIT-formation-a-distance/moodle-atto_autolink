@@ -40,12 +40,8 @@ export class ActivityForm extends Component {
         this.onInsert = this.onInsert.bind(this);
 
         this.state = {
-            data: { ...GeneratorCode.activityData }
+            data: Object.assign({}, GeneratorCode.activityData)
         };
-    }
-
-    componentWillUnmount(){
-        this.setState({data: { ...GeneratorCode.activityData }});
     }
 
     render() {       
@@ -141,9 +137,18 @@ export class ActivityForm extends Component {
         let data = this.state.data;
 
         let value = e.target.value;
-        if((e.target.type == 'checkbox') || (e.target.type == 'radio')){
+        if(e.target.name === 'otheroptions'){
+            value = data[e.target.name];
+            if((e.target.checked)){
+                value.add(e.target.value);
+            }
+            else{
+                value.delete(e.target.value);
+            }
+        }
+        else if((e.target.type == 'radio') || (e.target.type == 'checkbox')){
             value = (e.target.checked ? e.target.value : '');
-        }        
+        }  
         
         data[e.target.name] = value;
 

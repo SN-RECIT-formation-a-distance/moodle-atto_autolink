@@ -75,7 +75,9 @@ function atto_recitautolink_strings_for_js() {
                                             'border',
                                             'progressbarinfo',
                                             'displaybyrole',
-                                            'displaybyroleinfo'
+                                            'displaybyroleinfo',
+                                            'qrcode',
+                                            'qrcode100'
                                         ),
                                     'atto_recitautolink');
 }
