@@ -1,5 +1,5 @@
 $from = "moodle-atto_autolink/src/*"
-$to = "shared/recitfad/lib/editor/atto/plugins/recitautolink"
+$to = "shared/recitfad3/lib/editor/atto/plugins/recitautolink"
 
 try {
     . ("..\sync\watcher.ps1")
